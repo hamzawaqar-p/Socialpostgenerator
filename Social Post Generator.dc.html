@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/personio-brand-system-wip-d13d54b0-130b-4905-b709-6443de507c9f/colors_and_type.css">
+  <script src="_ds/personio-brand-system-wip-d13d54b0-130b-4905-b709-6443de507c9f/_ds_bundle.js"></script>
+
+  <style>
+    body { margin: 0; }
+    a { color: var(--color-accent); }
+    a:hover { color: var(--color-accent-hover); }
+    ::selection { background: var(--color-accent-subtle); }
+    .app-shell { display:flex; width:100%; height:100vh; min-height:560px; background:var(--color-bg); font-family:var(--font-ui); }
+    .sidebar { width:360px; min-width:360px; height:100%; overflow-y:auto; background:var(--color-bg); border-right:1px solid var(--color-border); display:flex; flex-direction:column; }
+    .main-area { flex:1; height:100%; background:var(--color-bg-subtle); display:flex; flex-direction:column; align-items:center; padding:40px; box-sizing:border-box; overflow-y:auto; }
+    .main-area-inner { margin:auto 0; display:flex; flex-direction:column; align-items:center; gap:20px; width:100%; }
+    .stage-outer { container-type: inline-size; }
+    .stage-inner { transform: scale(calc(100cqw / 1080px)); }
+    @media (max-width: 900px) {
+      .app-shell { flex-direction:column; height:auto; min-height:100vh; }
+      .sidebar { width:100%; min-width:0; height:auto; max-height:none; border-right:none; border-bottom:1px solid var(--color-border); }
+      .main-area { padding:24px 16px; }
+    }
+  </style>
+</helmet>
+<div class="app-shell">
+
+  <div class="sidebar">
+
+    <div style="padding:36px 32px 24px;">
+      <div style="font-size:12px; font-weight:600; letter-spacing:0.06em; color:var(--color-accent); text-transform:uppercase;">Social media post</div>
+      <div style="font-size:24px; font-weight:600; color:var(--color-fg); margin-top:6px; font-family:var(--font-sans);">Hiring announcement</div>
+    </div>
+
+    <div style="height:1px; background:var(--color-border); margin:0 32px;"></div>
+
+    <div style="padding:28px 32px; display:flex; flex-direction:column; gap:24px;">
+
+      <div style="display:flex; gap:6px; padding:4px; background:var(--color-bg-subtle); border-radius:var(--radius-md); border:1px solid var(--color-border);">
+        <button onClick="{{ selectTab2 }}" style="{{ tab2Style }}">Template 1</button>
+        <button onClick="{{ selectTab1 }}" style="{{ tab1Style }}">Template 2</button>
+      </div>
+
+      <sc-if value="{{ isTemplate1 }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="width:16px; height:2px; background:var(--color-accent); border-radius:2px;"></div>
+        <div style="font-size:15px; font-weight:600; color:var(--color-fg);">Card details</div>
+      </div>
+
+      <div>
+        <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--color-fg-secondary); margin-bottom:8px;">Primary heading</label>
+        <textarea rows="2" value="{{ primaryHeading }}" onInput="{{ setPrimary }}" maxlength="60" placeholder="e.g. Creative Director" style="width:100%; box-sizing:border-box; resize:none; border:1px solid var(--color-border); background:var(--color-bg-subtle); border-radius:var(--radius-md); padding:12px 14px; font-size:15px; font-family:var(--font-ui); color:var(--color-fg); outline:none;"></textarea>
+      </div>
+
+      <div>
+        <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--color-fg-secondary); margin-bottom:8px;">Secondary heading</label>
+        <input type="text" value="{{ secondaryHeading }}" onInput="{{ setSecondary }}" maxlength="40" placeholder="e.g. We are hiring" style="width:100%; box-sizing:border-box; border:1px solid var(--color-border); background:var(--color-bg-subtle); border-radius:var(--radius-md); padding:12px 14px; font-size:15px; font-family:var(--font-ui); color:var(--color-fg); outline:none;" />
+      </div>
+
+      <div>
+        <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--color-fg-secondary); margin-bottom:10px;">Background image</label>
+        <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; max-height:280px; overflow-y:auto; padding-right:2px;">
+          <div onClick="{{ selectBgRockface }}" style="{{ bgTileStyle.rockface }}">
+            <img src="assets/bg-rockface.jpg" alt="Rock face" style="width:100%; height:100%; object-fit:cover; display:block;" />
+            <sc-if value="{{ bgSelected.rockface }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(20,20,20,0.25);">
+                <div style="width:22px; height:22px; border-radius:50%; background:var(--color-accent); display:flex; align-items:center; justify-content:center;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 12.5L9.5 18L20 6" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          <div onClick="{{ selectBgPeaks }}" style="{{ bgTileStyle.peaks }}">
+            <img src="assets/bg-peaks.png" alt="Cloud ridge sunset" style="width:100%; height:100%; object-fit:cover; display:block;" />
+            <sc-if value="{{ bgSelected.peaks }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(20,20,20,0.25);">
+                <div style="width:22px; height:22px; border-radius:50%; background:var(--color-accent); display:flex; align-items:center; justify-content:center;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 12.5L9.5 18L20 6" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          <div onClick="{{ selectBgClouds }}" style="{{ bgTileStyle.clouds }}">
+            <img src="assets/bg-clouds.png" alt="Rock boulder" style="width:100%; height:100%; object-fit:cover; display:block;" />
+            <sc-if value="{{ bgSelected.clouds }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(20,20,20,0.25);">
+                <div style="width:22px; height:22px; border-radius:50%; background:var(--color-accent); display:flex; align-items:center; justify-content:center;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 12.5L9.5 18L20 6" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          <div onClick="{{ selectBgStackedRocks }}" style="{{ bgTileStyle.stackedRocks }}">
+            <img src="assets/bg-stacked-rocks.png" alt="Stacked rocks" style="width:100%; height:100%; object-fit:cover; display:block;" />
+            <sc-if value="{{ bgSelected.stackedRocks }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(20,20,20,0.25);">
+                <div style="width:22px; height:22px; border-radius:50%; background:var(--color-accent); display:flex; align-items:center; justify-content:center;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 12.5L9.5 18L20 6" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          <div onClick="{{ selectBgPurpleGradient }}" style="{{ bgTileStyle.purpleGradient }}">
+            <img src="assets/bg-purple-gradient.png" alt="Purple gradient" style="width:100%; height:100%; object-fit:cover; display:block;" />
+            <sc-if value="{{ bgSelected.purpleGradient }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(20,20,20,0.25);">
+                <div style="width:22px; height:22px; border-radius:50%; background:var(--color-accent); display:flex; align-items:center; justify-content:center;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M4 12.5L9.5 18L20 6" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <sc-if value="{{ isTemplate2 }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="width:16px; height:2px; background:var(--color-accent); border-radius:2px;"></div>
+        <div style="font-size:15px; font-weight:600; color:var(--color-fg);">Card details</div>
+      </div>
+
+      <div>
+        <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--color-fg-secondary); margin-bottom:8px;">Position text</label>
+        <input type="text" value="{{ t2Position }}" onInput="{{ setT2Position }}" placeholder="e.g. Associate Solutions Engineer" style="width:100%; box-sizing:border-box; border:1px solid var(--color-border); background:var(--color-bg-subtle); border-radius:var(--radius-md); padding:12px 14px; font-size:15px; font-family:var(--font-ui); color:var(--color-fg); outline:none;" />
+      </div>
+
+      <div>
+        <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--color-fg-secondary); margin-bottom:8px;">Department</label>
+        <input type="text" value="{{ t2Department }}" onInput="{{ setT2Department }}" placeholder="e.g. Go to market" style="width:100%; box-sizing:border-box; border:1px solid var(--color-border); background:var(--color-bg-subtle); border-radius:var(--radius-md); padding:12px 14px; font-size:15px; font-family:var(--font-ui); color:var(--color-fg); outline:none; text-transform:uppercase;" />
+      </div>
+
+      <div>
+        <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--color-fg-secondary); margin-bottom:8px;">Employment type</label>
+        <input type="text" value="{{ t2Employment }}" onInput="{{ setT2Employment }}" placeholder="e.g. Full time" style="width:100%; box-sizing:border-box; border:1px solid var(--color-border); background:var(--color-bg-subtle); border-radius:var(--radius-md); padding:12px 14px; font-size:15px; font-family:var(--font-ui); color:var(--color-fg); outline:none;" />
+      </div>
+
+      <div>
+        <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--color-fg-secondary); margin-bottom:8px;">Location</label>
+        <input type="text" value="{{ t2Location }}" onInput="{{ setT2Location }}" placeholder="e.g. Munich or Berlin" style="width:100%; box-sizing:border-box; border:1px solid var(--color-border); background:var(--color-bg-subtle); border-radius:var(--radius-md); padding:12px 14px; font-size:15px; font-family:var(--font-ui); color:var(--color-fg); outline:none;" />
+      </div>
+
+      <div>
+        <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--color-fg-secondary); margin-bottom:8px;">Market</label>
+        <input type="text" value="{{ t2Market }}" onInput="{{ setT2Market }}" placeholder="e.g. DACH Market" style="width:100%; box-sizing:border-box; border:1px solid var(--color-border); background:var(--color-bg-subtle); border-radius:var(--radius-md); padding:12px 14px; font-size:15px; font-family:var(--font-ui); color:var(--color-fg); outline:none;" />
+      </div>
+      </sc-if>
+
+      <div style="margin-top:2px; padding-top:14px; border-top:1px solid var(--color-border);">
+        <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--color-fg-secondary); margin-bottom:10px;">Message template</label>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <sc-for list="{{ templates }}" as="tpl" hint-placeholder-count="4">
+            <div>
+              <div onClick="{{ tpl.onToggle }}" style="{{ tpl.optionStyle }}">
+                <div style="width:16px; height:16px; border-radius:50%; border:2px solid {{ tpl.borderColor }}; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <sc-if value="{{ tpl.selected }}" hint-placeholder-val="{{ false }}">
+                    <div style="width:8px; height:8px; border-radius:50%; background:var(--color-accent);"></div>
+                  </sc-if>
+                </div>
+                <div style="font-size:14px; color:var(--color-fg); font-weight:500;">{{ tpl.label }}</div>
+              </div>
+              <sc-if value="{{ tpl.selected }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex; flex-direction:column; gap:16px; margin-top:12px; padding-left:2px;">
+                  <sc-for list="{{ tpl.fields }}" as="fld" hint-placeholder-count="3">
+                    <div>
+                      <label style="display:block; font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:var(--color-fg-secondary); margin-bottom:8px;">{{ fld.label }}</label>
+                      <sc-if value="{{ fld.multiline }}" hint-placeholder-val="{{ false }}">
+                        <textarea rows="3" value="{{ fld.value }}" onInput="{{ fld.onChange }}" placeholder="{{ fld.placeholder }}" style="width:100%; box-sizing:border-box; resize:none; border:1px solid var(--color-border); background:var(--color-bg-subtle); border-radius:var(--radius-md); padding:12px 14px; font-size:15px; font-family:var(--font-ui); color:var(--color-fg); outline:none;"></textarea>
+                      </sc-if>
+                      <sc-if value="{{ fld.single }}" hint-placeholder-val="{{ true }}">
+                        <input type="text" value="{{ fld.value }}" onInput="{{ fld.onChange }}" placeholder="{{ fld.placeholder }}" style="width:100%; box-sizing:border-box; border:1px solid var(--color-border); background:var(--color-bg-subtle); border-radius:var(--radius-md); padding:12px 14px; font-size:15px; font-family:var(--font-ui); color:var(--color-fg); outline:none;" />
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="flex:1;"></div>
+
+    <div style="padding:24px 32px 32px; display:flex; flex-direction:column; gap:12px;">
+      <div style="height:1px; background:var(--color-border); margin-bottom:4px;"></div>
+      <button onClick="{{ exportJPG }}" style="display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:14px; background:var(--color-fg); color:#fff; border:none; border-radius:var(--radius-full); font-size:15px; font-weight:600; font-family:var(--font-ui); cursor:pointer;" style-hover="background:#000;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        {{ exportLabel }}
+      </button>
+      <div style="font-size:12px; color:var(--color-fg-tertiary); text-align:center;">Changes are reflected live in the canvas.</div>
+    </div>
+
+  </div>
+
+  <div class="main-area">
+
+    <div class="main-area-inner" style="max-width:620px;">
+
+      <sc-if value="{{ hasActiveTemplate }}" hint-placeholder-val="{{ false }}">
+        <div style="width:100%; background:#fff; border:1px solid var(--color-border); border-radius:var(--radius-lg); box-shadow:var(--shadow-sm); padding:20px; box-sizing:border-box; position:relative;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+            <div style="width:40px; height:40px; border-radius:50%; background:var(--color-bg-lavender); flex-shrink:0;"></div>
+            <div>
+              <div style="font-size:14px; font-weight:600; color:var(--color-fg);">Your name</div>
+              <div style="font-size:12px; color:var(--color-fg-tertiary);">Personio · now</div>
+            </div>
+          </div>
+          <div style="font-size:14px; line-height:1.5; color:var(--color-fg); white-space:pre-wrap;">{{ activeTemplateText }}</div>
+          <div style="display:flex; justify-content:flex-end; margin-top:14px;">
+            <div onClick="{{ copyToClipboard }}" title="Copy text" style="width:32px; height:32px; border-radius:50%; background:var(--color-bg-subtle); display:flex; align-items:center; justify-content:center; cursor:pointer; border:1px solid var(--color-border);">
+              <sc-if value="{{ justCopied }}" hint-placeholder-val="{{ false }}">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M4 12.5L9.5 18L20 6" stroke="var(--color-accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </sc-if>
+              <sc-if value="{{ notCopied }}" hint-placeholder-val="{{ true }}">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="12" height="12" rx="2" stroke="var(--color-fg-secondary)" stroke-width="2"/><path d="M4 16V6C4 4.89543 4.89543 4 6 4H16" stroke="var(--color-fg-secondary)" stroke-width="2"/></svg>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="display:flex; align-items:center; justify-content:center;">
+        <div style="padding:8px 18px; background:var(--color-bg-lavender); color:var(--color-accent-hover); font-size:11px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; border-radius:var(--radius-full);">Preview</div>
+      </div>
+
+    <div ref="{{ stageOuterRef }}" class="stage-outer" style="width:min(62vh, 62vw, 90vw, 620px); aspect-ratio:1/1; border-radius:20px; overflow:hidden; box-shadow:var(--shadow-lg); background:#fff;">
+      <div ref="{{ stageRef }}" class="stage-inner" style="width:1080px; height:1080px; transform-origin:top left;">
+        <sc-if value="{{ isTemplate1 }}" hint-placeholder-val="{{ true }}">
+        <div style="position:relative; width:1080px; height:1080px; overflow:hidden; background:linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), linear-gradient(rgb(255,255,255),rgb(255,255,255));">
+          <div style="position:absolute; left:0; top:0; width:1080px; height:1080px; background:linear-gradient(180deg, rgba(6,27,71,0.15) 52.81%, rgba(184,92,214,0.15) 100%), url('{{ activeBgSrc }}') center / cover no-repeat;"></div>
+
+          <div style="position:absolute; left:343.831px; top:65.627px; width:392px; height:82px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+            <span ref="{{ secondaryRef }}" style="font-family:'FT Regola Neue', var(--font-sans); font-weight:500; font-size:{{ secondarySize }}px; text-align:center; line-height:100%; letter-spacing:-0.030em; color:rgb(255,255,255); word-break:break-word; text-wrap:balance;">{{ secondaryHeading }}</span>
+          </div>
+
+          <div style="position:absolute; left:276px; top:422.299px; width:528px; height:244px; display:flex; align-items:center; justify-content:center; overflow:visible;">
+            <div ref="{{ primaryRef }}" style="font-family:'FT Regola Neue', var(--font-sans); font-weight:500; font-size:{{ primarySize }}px; text-align:center; line-height:0.87; letter-spacing:-0.020em; color:rgb(255,255,255); display:flex; flex-direction:column; align-items:center;">
+              <sc-for list="{{ primaryWords }}" as="word" hint-placeholder-count="1">
+                <div style="white-space:nowrap;">{{ word }}</div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="position:absolute; left:0; top:0; transform:matrix(0,1,-1,0,674.490,984.412); transform-origin:0 0; width:480.867px; height:266.942px; border-radius:39.652px; background:linear-gradient(90deg, rgba(106,33,131,0.2) 0%, rgba(255,255,255,0.2) 33.23%), linear-gradient(rgb(106,33,131),rgb(106,33,131)); box-shadow:0px 1.401px 0px 0px rgba(0,0,0,0.09);">
+            <svg viewBox="0 0 165 31" style="position:absolute; left:0; top:0; width:164.437px; height:31.001px; transform:matrix(0,-1,1,0,30.334,215.594); transform-origin:0 0;" fill="{{ logoColor }}">
+              <path d="M131.718 30.5364L137.404 30.5364L137.404 10.6738L131.718 10.6738L131.718 30.5364ZM134.514 7.33247C136.565 7.33247 138.243 5.7546 138.243 3.71265C138.243 1.6707 136.565 1.62798e-05 134.514 1.60354e-05C132.463 1.57909e-05 130.879 1.6707 130.879 3.71265C130.879 5.7546 132.463 7.33247 134.514 7.33247ZM11.7455 1.11379L-1.32774e-07 1.11379L-3.62916e-06 30.4436L5.96598 30.4436L5.96598 19.3057L11.2794 19.3057C16.7793 19.3057 21.347 16.0572 21.347 10.2097C21.347 4.36235 17.3386 1.11379 11.7455 1.11379ZM11.4659 14.0152L5.96598 14.0152L5.96598 6.21866L11.7455 6.21867C14.076 6.21867 15.9404 7.70372 15.9404 10.1169C15.9404 12.5301 13.9828 14.0152 11.4659 14.0152ZM146.167 19.3057C146.167 23.1112 148.963 25.8028 152.505 25.8028C156.048 25.8028 158.844 23.1112 158.844 19.3057C158.844 15.5003 156.141 12.7158 152.505 12.7158C148.87 12.7158 146.167 15.5003 146.167 19.3057ZM140.667 19.3057C140.667 12.5302 145.794 7.5181 152.505 7.5181C159.217 7.51811 164.437 12.5302 164.437 19.3057C164.437 26.0813 159.31 31.0005 152.505 31.0005C145.701 31.0005 140.667 26.0813 140.667 19.3057ZM107.854 14.108L107.854 30.5364L113.354 30.5364L113.354 14.8506C113.354 13.5511 114.099 12.9014 115.311 12.9014L119.972 12.9014C121.184 12.9014 121.93 13.5511 121.93 14.8506L121.93 30.5364L127.43 30.5364L127.43 14.108C127.43 10.6738 124.54 7.79655 120.998 7.79655L114.286 7.79655C110.744 7.79655 107.854 10.6738 107.854 14.108ZM87.3457 19.3057C87.3457 23.1112 90.0491 25.8028 93.6846 25.8028C97.3201 25.8028 100.023 23.1112 100.023 19.3057C100.023 15.5003 97.2269 12.7158 93.6846 12.7158C90.1423 12.7158 87.3457 15.5003 87.3457 19.3057ZM81.8458 19.3057C81.8458 12.5302 86.8797 7.5181 93.6846 7.5181C100.49 7.5181 105.523 12.5302 105.523 19.3057C105.523 26.0813 100.49 31.0005 93.6846 31.0005C86.8797 31.0005 81.8458 26.0813 81.8458 19.3057ZM60.4988 23.5752L66.1851 23.5752C66.3716 25.8028 68.0495 26.6382 70.4732 26.6382C72.4308 26.6382 74.2952 26.0813 74.2952 24.1321C74.2952 22.183 72.4308 21.9046 70.8461 21.6261L68.6088 21.2548C64.3208 20.5123 61.0581 18.8416 61.0581 14.6649C61.0581 10.1169 65.4394 7.51809 70.1935 7.51809C74.9477 7.5181 79.329 9.93131 79.5154 14.6649L74.0155 14.6649C73.8291 12.623 72.3376 11.8804 70.1935 11.8804C68.0495 11.8804 66.6512 12.4373 66.6512 14.2008C66.6512 15.7787 68.0495 16.3356 69.7274 16.6141L72.1511 16.9853C76.346 17.635 79.795 19.1201 79.795 23.4824C79.795 28.4017 75.507 31.0005 70.38 31.0005C65.5326 31.0005 60.9649 28.4017 60.4988 23.5752ZM46.8889 14.108L46.8889 30.5364L52.3888 30.5364L52.3888 14.8505C52.3888 13.5511 53.1345 12.9014 54.3464 12.9014L59.4734 12.9014L59.4734 7.79654L53.321 7.79654C49.7787 7.79654 46.8889 10.6738 46.8889 14.108ZM27.7791 16.8925L38.7789 16.8925C38.3128 14.2937 36.0756 12.4373 33.279 12.4373C30.4825 12.4373 28.2452 14.2936 27.7791 16.8925ZM21.7199 19.3057C21.7199 12.7158 26.5673 7.51809 33.0926 7.51809C40.4568 7.51809 44.2788 13.087 44.2788 18.8416C44.2788 19.5842 44.1856 20.3267 44.0924 21.0692L27.5927 21.0692C27.7791 24.0393 30.2028 25.8028 33.279 25.8028C35.2366 25.8028 37.0077 24.8747 38.3128 23.204L42.5076 26.1741C40.084 29.4226 36.7281 31.0005 33.0926 31.0005C26.6605 31.0005 21.7199 25.8956 21.7199 19.3057Z"/>
+            </svg>
+          </div>
+        </div>
+        </sc-if>
+        <sc-if value="{{ isTemplate2 }}" hint-placeholder-val="{{ false }}">
+        <div style="position:relative; width:1080px; height:1080px; overflow:hidden; background:url('assets/tpl2-bg.png') center / cover no-repeat;">
+
+          <div style="position:absolute; left:24px; top:34px; height:254px; line-height:254px; font-family:'FT Regola Neue', var(--font-sans); font-weight:500; font-size:286px; letter-spacing:-17px; color:rgb(255,255,255); white-space:nowrap;">We are</div>
+          <div style="position:absolute; right:23.406px; top:288px; height:254px; line-height:254px; font-family:'FT Regola Neue', var(--font-sans); font-weight:500; font-size:286px; letter-spacing:-17px; color:rgb(255,55,0); white-space:nowrap;">Hiring</div>
+
+          <svg viewBox="0 0 1032.594 440.071" style="position:absolute; left:24px; top:598.999px; width:1032.594px; height:440.071px;" fill="rgb(200,133,224)">
+            <path d="M 5.1 39.348 C 5.377 17.536 23.138 0 44.951 0 L 992.099 0 C 1014.359 0 1032.304 18.233 1031.949 40.49 L 1027.625 311.841 C 1027.278 333.602 1009.538 351.061 987.775 351.061 L 812.441 351.061 C 798.209 351.061 785.056 358.651 777.935 370.973 L 749.508 420.159 C 742.386 432.481 729.234 440.071 715.002 440.071 L 40.365 440.071 C 18.156 440.071 0.231 421.917 0.514 399.709 L 5.1 39.348 Z" fill-rule="nonzero"/>
+          </svg>
+
+          <div style="position:absolute; left:88px; top:648px; width:800px; font-family:'FT Regola Neue', var(--font-sans); font-weight:500; font-size:22px; letter-spacing:0.08em; text-transform:uppercase; color:rgb(255,255,255);">{{ t2Department }}</div>
+
+          <div style="position:absolute; left:88px; top:688px; width:620px; height:150px; font-family:'FT Regola Neue', var(--font-sans); font-weight:500; font-size:58px; line-height:1.15; letter-spacing:-0.02em; color:rgb(255,255,255); overflow:hidden;">{{ t2Position }}</div>
+
+          <div style="position:absolute; left:62px; bottom:87px; width:750px; display:flex; flex-wrap:wrap; align-items:center; gap:16px;">
+            <div style="display:inline-flex; align-items:center; gap:12px; padding:12px 28px; border-radius:999px; background:rgb(255,255,255); white-space:nowrap;">
+              <svg width="28" height="28" viewBox="0 0 20.1 26.5" fill="rgb(83,26,102)"><path d="M 10.05 0 C 15.6 0 20.1 4.499 20.1 10.05 C 20.1 14.556 17.134 18.37 13.048 19.646 L 11.247 25.611 C 11.088 26.139 10.601 26.5 10.05 26.5 C 9.499 26.5 9.013 26.139 8.854 25.611 L 7.052 19.646 C 2.966 18.37 0 14.556 0 10.05 C 0 4.499 4.499 0 10.05 0 Z M 10.05 2.5 C 5.88 2.5 2.5 5.88 2.5 10.05 C 2.5 13.917 5.408 17.106 9.156 17.548 C 9.417 17.578 9.723 17.6 10.05 17.6 C 10.377 17.6 10.683 17.578 10.944 17.548 C 14.693 17.106 17.6 13.917 17.6 10.05 C 17.6 5.88 14.219 2.5 10.05 2.5 Z" fill-rule="nonzero"/></svg>
+              <span style="font-family:'FT Regola Neue', var(--font-sans); font-weight:500; font-size:22px; letter-spacing:-0.01em; color:rgb(83,26,102);">{{ t2Location }}</span>
+            </div>
+            <div style="display:inline-flex; align-items:center; gap:12px; padding:12px 28px; border-radius:999px; background:rgb(255,255,255); white-space:nowrap;">
+              <svg width="28" height="28" viewBox="0 0 27.3 27.3" fill="rgb(83,26,102)"><path d="M 13.65 0 C 21.189 0 27.3 6.112 27.3 13.65 C 27.3 21.189 21.189 27.3 13.65 27.3 C 6.112 27.3 0 21.189 0 13.65 C 0 6.112 6.112 0 13.65 0 Z M 13.65 2.5 C 7.492 2.5 2.5 7.492 2.5 13.65 C 2.5 19.808 7.493 24.8 13.65 24.8 C 19.808 24.8 24.8 19.808 24.8 13.65 C 24.8 7.493 19.808 2.5 13.65 2.5 Z M 14.048 7.707 C 14.238 7.043 14.93 6.658 15.594 6.848 C 16.257 7.037 16.642 7.73 16.452 8.394 L 15.054 13.286 L 19.334 17.566 C 19.822 18.055 19.822 18.846 19.334 19.334 C 18.846 19.822 18.055 19.822 17.566 19.334 L 12.767 14.534 C 12.446 14.213 12.324 13.743 12.448 13.307 L 14.048 7.707 Z" fill-rule="nonzero"/></svg>
+              <span style="font-family:'FT Regola Neue', var(--font-sans); font-weight:500; font-size:22px; letter-spacing:-0.01em; color:rgb(83,26,102);">{{ t2Employment }}</span>
+            </div>
+            <div style="display:inline-flex; align-items:center; gap:12px; padding:12px 28px; border-radius:999px; background:rgb(255,255,255); white-space:nowrap;">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="rgb(83,26,102)">
+                <path d="M 15.667 3.564 C 15.616 3.377 15.349 3.426 15.33 3.619 C 15.255 4.4 15.041 5.185 14.709 5.94 C 13.87 7.852 12.259 9.636 10.102 10.882 C 7.945 12.127 5.594 12.629 3.519 12.4 C 2.493 12.287 1.521 11.992 0.677 11.511 C 0.537 11.431 0.363 11.558 0.412 11.712 C 0.589 12.271 0.818 12.807 1.096 13.313 C 1.216 13.464 1.346 13.608 1.483 13.745 C 4.111 16.372 9.169 15.981 12.81 12.341 C 15.48 9.672 16.402 6.241 15.667 3.564 Z" fill-rule="nonzero"/>
+                <path d="M 17.731 6.806 C 17.684 6.621 17.421 6.649 17.393 6.837 C 17.037 9.179 15.84 11.557 13.933 13.464 C 11.605 15.791 8.578 17.059 5.767 17.035 C 5.573 17.034 5.503 17.299 5.684 17.37 C 6.709 17.777 7.828 18 8.998 18 C 13.97 18 18 13.971 18 9 C 18 8.243 17.907 7.508 17.731 6.806 Z" fill-rule="nonzero"/>
+                <path d="M 0.783 5.314 C 0.393 6.182 0.136 7.123 0.04 8.112 C 0 8.519 0.103 8.934 0.371 9.243 C 1.128 10.114 2.285 10.666 3.693 10.821 C 5.398 11.009 7.413 10.6 9.308 9.506 C 11.203 8.412 12.565 6.873 13.255 5.302 C 13.773 4.121 13.903 2.955 13.637 1.932 C 13.591 1.753 13.324 1.791 13.277 1.97 C 13.101 2.636 12.712 3.258 12.213 3.785 C 11.343 4.705 10.052 5.449 8.556 5.85 C 7.061 6.251 5.57 6.252 4.357 5.89 C 3.305 5.577 2.363 4.952 1.927 3.985 C 1.868 3.855 1.687 3.825 1.605 3.942 C 1.29 4.39 1.016 4.849 0.783 5.314 Z" fill-rule="nonzero"/>
+                <path d="M 11.735 0.839 C 11.619 0.468 11.236 0.272 10.856 0.192 C 10.257 0.066 9.635 0 8.998 0 C 7.123 0 5.381 0.573 3.94 1.554 C 3.748 1.685 3.579 1.851 3.473 2.058 C 3.266 2.465 3.227 2.838 3.309 3.145 C 3.438 3.627 3.907 4.099 4.811 4.368 C 5.7 4.633 6.887 4.653 8.145 4.316 C 9.404 3.979 10.422 3.368 11.059 2.694 C 11.707 2.009 11.877 1.366 11.748 0.884 C 11.744 0.869 11.74 0.854 11.735 0.839 Z" fill-rule="nonzero"/>
+              </svg>
+              <span style="font-family:'FT Regola Neue', var(--font-sans); font-weight:500; font-size:22px; letter-spacing:-0.01em; color:rgb(83,26,102);">{{ t2Market }}</span>
+            </div>
+          </div>
+
+          <svg viewBox="0 0 183 35" style="position:absolute; left:826px; top:984px; width:183px; height:35px;" fill="{{ logoColor }}">
+            <path d="M 146.587 34.476 L 152.915 34.476 L 152.915 12.051 L 146.587 12.051 L 146.587 34.476 Z M 149.699 8.278 C 151.981 8.278 153.849 6.497 153.849 4.192 C 153.849 1.886 151.981 0 149.699 0 C 147.417 0 145.653 1.886 145.653 4.192 C 145.653 6.497 147.417 8.278 149.699 8.278 Z M 13.071 1.257 L 0 1.257 L 0 34.371 L 6.639 34.371 L 6.639 21.796 L 12.553 21.796 C 18.673 21.796 23.757 18.129 23.757 11.527 C 23.757 4.925 19.296 1.257 13.071 1.257 Z M 12.76 15.823 L 6.639 15.823 L 6.639 7.021 L 13.071 7.021 C 15.665 7.021 17.74 8.698 17.74 11.422 C 17.74 14.147 15.561 15.823 12.76 15.823 Z M 162.667 21.796 C 162.667 26.093 165.779 29.132 169.721 29.132 C 173.663 29.132 176.775 26.093 176.775 21.796 C 176.775 17.5 173.767 14.356 169.721 14.356 C 165.675 14.356 162.667 17.5 162.667 21.796 Z M 156.546 21.796 C 156.546 14.147 162.252 8.488 169.721 8.488 C 177.19 8.488 183 14.147 183 21.796 C 183 29.446 177.294 35 169.721 35 C 162.148 35 156.546 29.446 156.546 21.796 Z M 120.029 15.928 L 120.029 34.476 L 126.15 34.476 L 126.15 16.766 C 126.15 15.299 126.98 14.566 128.328 14.566 L 133.515 14.566 C 134.864 14.566 135.694 15.299 135.694 16.766 L 135.694 34.476 L 141.815 34.476 L 141.815 15.928 C 141.815 12.051 138.599 8.802 134.656 8.802 L 127.187 8.802 C 123.245 8.802 120.029 12.051 120.029 15.928 Z M 97.206 21.796 C 97.206 26.093 100.214 29.132 104.26 29.132 C 108.306 29.132 111.315 26.093 111.315 21.796 C 111.315 17.5 108.202 14.356 104.26 14.356 C 100.318 14.356 97.206 17.5 97.206 21.796 Z M 91.085 21.796 C 91.085 14.147 96.687 8.488 104.26 8.488 C 111.833 8.488 117.435 14.147 117.435 21.796 C 117.435 29.446 111.833 35 104.26 35 C 96.687 35 91.085 29.446 91.085 21.796 Z M 67.328 26.617 L 73.656 26.617 C 73.864 29.132 75.731 30.075 78.429 30.075 C 80.607 30.075 82.682 29.446 82.682 27.246 C 82.682 25.045 80.607 24.731 78.844 24.416 L 76.354 23.997 C 71.582 23.159 67.951 21.272 67.951 16.557 C 67.951 11.422 72.827 8.488 78.117 8.488 C 83.408 8.488 88.284 11.213 88.491 16.557 L 82.371 16.557 C 82.163 14.251 80.503 13.413 78.117 13.413 C 75.731 13.413 74.175 14.042 74.175 16.033 C 74.175 17.814 75.731 18.443 77.599 18.757 L 80.296 19.177 C 84.964 19.91 88.803 21.587 88.803 26.512 C 88.803 32.066 84.031 35 78.325 35 C 72.93 35 67.847 32.066 67.328 26.617 Z M 52.182 15.928 L 52.182 34.476 L 58.303 34.476 L 58.303 16.766 C 58.303 15.299 59.133 14.566 60.481 14.566 L 66.187 14.566 L 66.187 8.802 L 59.34 8.802 C 55.398 8.802 52.182 12.051 52.182 15.928 Z M 30.915 19.072 L 43.156 19.072 C 42.638 16.138 40.148 14.042 37.036 14.042 C 33.923 14.042 31.434 16.138 30.915 19.072 Z M 24.172 21.796 C 24.172 14.356 29.566 8.488 36.828 8.488 C 45.024 8.488 49.277 14.775 49.277 21.272 C 49.277 22.111 49.173 22.949 49.07 23.787 L 30.707 23.787 C 30.915 27.141 33.612 29.132 37.036 29.132 C 39.214 29.132 41.185 28.084 42.638 26.198 L 47.306 29.551 C 44.609 33.219 40.874 35 36.828 35 C 29.67 35 24.172 29.237 24.172 21.796 Z" fill-rule="nonzero"/>
+          </svg>
+        </div>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="font-size:13px; color:var(--color-fg-tertiary);">Hiring announcement — Preview</div>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;logoColor&quot;: {&quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#FFFFFF&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#FFFFFF&quot;, &quot;#141414&quot;, &quot;#A533CC&quot;, &quot;#EDD6F5&quot;], &quot;section&quot;: &quot;Logo&quot;}}">
+const BACKGROUNDS = [
+  { key: 'rockface', label: 'Rock face', src: 'assets/bg-rockface.jpg' },
+  { key: 'peaks', label: 'Cloud ridge sunset', src: 'assets/bg-peaks.png' },
+  { key: 'clouds', label: 'Rock boulder', src: 'assets/bg-clouds.png' },
+  { key: 'stackedRocks', label: 'Stacked rocks', src: 'assets/bg-stacked-rocks.png' },
+  { key: 'purpleGradient', label: 'Purple gradient', src: 'assets/bg-purple-gradient.png' },
+];
+
+function wrapCanvasText(ctx, text, maxWidth) {
+  const words = text.split(/\s+/).filter(Boolean);
+  const lines = [];
+  let cur = '';
+  for (const w of words) {
+    const test = cur ? cur + ' ' + w : w;
+    if (ctx.measureText(test).width > maxWidth && cur) {
+      lines.push(cur);
+      cur = w;
+    } else {
+      cur = test;
+    }
+  }
+  if (cur) lines.push(cur);
+  return lines.length ? lines : [''];
+}
+
+const MESSAGE_TEMPLATES = [
+  {
+    key: 'social01',
+    label: 'Social Media',
+    fields: [
+      { id: 'city', label: 'City', placeholder: 'e.g. Munich' },
+      { id: 'line', label: 'What the role works on', placeholder: "e.g. You'd own our onboarding flow end to end.", multiline: true },
+      { id: 'link', label: 'Link', placeholder: 'e.g. personio.com/careers/123' },
+    ],
+    build: (v, primary) => {
+      const role = primary || '[role]';
+      const city = v.city || '[city]';
+      const line = v.line || '[One concrete line on the work or the team. What would someone actually do, or work on?]';
+      const link = v.link || '[link]';
+      return `My team at Personio is hiring a ${role} in ${city}.\n${line}\nI enjoy working here and I'm happy to answer honest questions.\nKnow someone? Send them my way, or share this: ${link}`;
+    },
+  },
+  {
+    key: 'dm01',
+    label: 'Message Option 01',
+    fields: [
+      { id: 'name', label: 'Their name', placeholder: 'e.g. Sam' },
+      { id: 'context', label: 'Previous company / university / project', placeholder: 'e.g. Acme Corp' },
+      { id: 'department', label: 'Department', placeholder: 'e.g. Engineering' },
+      { id: 'teamDesc', label: 'Describe the team briefly', placeholder: 'e.g. collaborative, fast-moving team of 8', multiline: true },
+      { id: 'jobTitle', label: 'Job title', placeholder: 'e.g. Product Designer' },
+      { id: 'link', label: 'Job careers page link', placeholder: 'e.g. personio.com/careers/123' },
+      { id: 'fullName', label: 'Your full name', placeholder: 'e.g. Jamie Lee' },
+    ],
+    build: (v) => {
+      const name = v.name || '[name]';
+      const context = v.context || '[previous company / university / project]';
+      const department = v.department || '[department]';
+      const teamDesc = v.teamDesc || '[describe team briefly — e.g., collaborative, fast-moving team of X people]';
+      const jobTitle = v.jobTitle || '[job title]';
+      const link = v.link || '[add job careers page link]';
+      const fullName = v.fullName || '[Full name]';
+      return `Hey ${name}, It's been way too long. how are you?\n\nI was just thinking about our time together at ${context}, and you came to mind for a reason:\nWe have an opening in the ${department} team here at Personio our. We're a ${teamDesc}, and from what I know about you, I think you'd fit right in, both in terms of how we work and the energy you'd bring.\n\nWe currently have an open ${jobTitle} role, and I'd love to refer you through our internal referral program. Would you be interested? If yes, just send me your CV and I'll apply directly on your behalf.\n\nHere you can already find the full job description ${link}.\n\nLooking forward to catching up and hopefully working together again!\nBest\n${fullName}`;
+    },
+  },
+  {
+    key: 'dm02',
+    label: 'Message Option 02',
+    fields: [
+      { id: 'name', label: 'Their name', placeholder: 'e.g. Sam' },
+      { id: 'currentCompany', label: 'Their current company', placeholder: 'e.g. Acme Corp' },
+      { id: 'context', label: 'Previous company / when you worked together', placeholder: 'e.g. Acme Corp, 2021' },
+      { id: 'jobTitle', label: 'Job title', placeholder: 'e.g. Product Designer' },
+      { id: 'skill', label: 'Specific skill you saw firsthand', placeholder: 'e.g. turning messy data into clear stories', multiline: true },
+      { id: 'project', label: 'Project / company you worked together on', placeholder: 'e.g. the launch project' },
+      { id: 'link', label: 'Job careers page link', placeholder: 'e.g. personio.com/careers/123' },
+      { id: 'fullName', label: 'Your full name', placeholder: 'e.g. Jamie Lee' },
+    ],
+    build: (v) => {
+      const name = v.name || '[name]';
+      const currentCompany = v.currentCompany || '[current company]';
+      const context = v.context || '[previous company / when you worked together]';
+      const jobTitle = v.jobTitle || '[job title]';
+      const skill = v.skill || '[specific skill you saw firsthand — e.g., turning messy data into clear stories / closing deals everyone else had given up on / shipping features under crazy deadlines]';
+      const project = v.project || '[project / at company]';
+      const link = v.link || '[add job careers page link]';
+      const fullName = v.fullName || '[Full name]';
+      return `Hi ${name}, Long time no speak. I hope things are going well at ${currentCompany}!\nI've been following your journey a bit and it's great to see how far you've come since ${context}.\n\nThe reason I'm writing: we're hiring a ${jobTitle} at Personio. I still remember how strong you were at ${skill} when we worked together on ${project}, and that's exactly what this role needs.\n\nIf you're even a little curious, send me your CV and I'll refer you through our internal referral program.\n\nHere you can already find the full job description ${link}.\n\nBest\n${fullName}`;
+    },
+  },
+  {
+    key: 'dm03',
+    label: 'Message Option 03',
+    fields: [
+      { id: 'name', label: 'Their name', placeholder: 'e.g. Sam' },
+      { id: 'currentCompany', label: 'Their current company', placeholder: 'e.g. Acme Corp' },
+      { id: 'jobTitle', label: 'Job title', placeholder: 'e.g. Product Designer' },
+      { id: 'jobDesc', label: 'Job description / unique aspects', placeholder: 'e.g. Briefly describe the job and what might interest them', multiline: true },
+      { id: 'link', label: 'Job link', placeholder: 'e.g. personio.com/careers/123' },
+      { id: 'senderName', label: 'Your name', placeholder: 'e.g. Jamie' },
+    ],
+    build: (v) => {
+      const name = v.name || '[name]';
+      const currentCompany = v.currentCompany || '[Current Company]';
+      const jobTitle = v.jobTitle || '[job title]';
+      const jobDesc = v.jobDesc || '[Briefly describe the job and any unique aspects that might interest them]';
+      const link = v.link || '[add job link]';
+      const senderName = v.senderName || '[name]';
+      return `Hi ${name},\n\nI hope this message finds you well!\n\nIt's been a while since we last connected. I've been keeping up with your impressive career progression at ${currentCompany}, and I wanted to reach out to you with an exciting opportunity.\nWe're currently looking for a ${jobTitle} at Personio, and based on your skills and experience, I think you would be a fantastic fit for the role. ${jobDesc}.\nIf you're open to exploring new opportunities, I'd love to tell you more about the role and discuss how it could align with your career goals. Here you can already find the full job description ${link}.\nLooking forward to catching up and hopefully working together again!\nBest\n${senderName}`;
+    },
+  },
+];
+
+const FT = '"FT Regola Neue"';
+
+function loadFonts() {
+  if (!document.fonts || !document.fonts.load) return Promise.resolve();
+  const specs = ['500 286px', '500 58px', '500 22px', '500 140px', '500 68px'];
+  return Promise.all(specs.map(s => document.fonts.load(`${s} ${FT}`).catch(() => {})))
+    .then(() => document.fonts.ready)
+    .catch(() => {});
+}
+
+function tileStyle(selected) {
+  return `position:relative; aspect-ratio:1/1; border-radius:10px; overflow:hidden; cursor:pointer; border:2px solid ${selected ? 'var(--color-accent)' : 'transparent'}; box-shadow:0 0 0 1px var(--color-border);`;
+}
+
+function drawCover(ctx, media, dx, dy, dw, dh) {
+  const sw = media.videoWidth || media.naturalWidth || media.width;
+  const sh = media.videoHeight || media.naturalHeight || media.height;
+  if (!sw || !sh) { ctx.drawImage(media, dx, dy, dw, dh); return; }
+  const srcRatio = sw / sh, dstRatio = dw / dh;
+  let sx, sy, sWidth, sHeight;
+  if (srcRatio > dstRatio) {
+    sHeight = sh; sWidth = sh * dstRatio; sx = (sw - sWidth) / 2; sy = 0;
+  } else {
+    sWidth = sw; sHeight = sw / dstRatio; sx = 0; sy = (sh - sHeight) / 2;
+  }
+  ctx.drawImage(media, sx, sy, sWidth, sHeight, dx, dy, dw, dh);
+}
+
+function fitCanvasText(ctx, text, weight, boxW, boxH, baseSize, minSize, lineHeightRatio) {
+  let size = baseSize;
+  let lines = [text];
+  while (size >= minSize) {
+    ctx.font = `${weight} ${size}px "FT Regola Neue", sans-serif`;
+    lines = wrapCanvasText(ctx, text, boxW);
+    const totalH = lines.length * size * lineHeightRatio;
+    const maxLineW = Math.max(...lines.map(l => ctx.measureText(l).width));
+    if (totalH <= boxH && maxLineW <= boxW) break;
+    size -= 2;
+  }
+  ctx.font = `${weight} ${size}px "FT Regola Neue", sans-serif`;
+  return { size, lines };
+}
+
+class Component extends DCLogic {
+  state = {
+    primaryHeading: 'Creative Director',
+    secondaryHeading: 'We are hiring',
+    bgKey: 'rockface',
+    primarySize: 140,
+    secondarySize: 68.48084259033203,
+    exportLabel: 'Export as JPG',
+    templateKey: null,
+    tplValues: {},
+    justCopied: false,
+    activeTab: 'template2',
+    t2Position: 'Associate Solutions Engineer',
+    t2Department: 'Go to market',
+    t2Employment: 'Full time',
+    t2Location: 'Munich or Berlin',
+    t2Market: 'DACH Market',
+  };
+
+  primaryRef = React.createRef();
+  secondaryRef = React.createRef();
+  stageRef = React.createRef();
+  stageOuterRef = React.createRef();
+
+  componentDidMount() {
+    this.fitText();
+    document.querySelectorAll('video').forEach(v => {
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+    });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => this.fitText());
+    }
+  }
+
+
+
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState || prevState.primaryHeading !== this.state.primaryHeading || prevState.secondaryHeading !== this.state.secondaryHeading) {
+      this.fitText();
+    }
+  }
+
+  fitText() {
+    this.fitOne(this.secondaryRef, 'secondarySize', 68.48084259033203, 24, 392, 82);
+  }
+
+  fitOne(ref, stateKey, base, min, boxW, boxH) {
+    const el = ref.current;
+    if (!el) return;
+    let size = base;
+    el.style.fontSize = size + 'px';
+    let guard = 0;
+    while ((el.scrollHeight > boxH || el.scrollWidth > boxW) && size > min && guard < 60) {
+      size -= 2;
+      el.style.fontSize = size + 'px';
+      guard++;
+    }
+    if (Math.abs(this.state[stateKey] - size) > 0.01) this.setState({ [stateKey]: size });
+  }
+
+  setPrimary = (e) => this.setState({ primaryHeading: e.target.value });
+  setSecondary = (e) => this.setState({ secondaryHeading: e.target.value });
+  selectTab1 = () => this.setState({ activeTab: 'template1' });
+  selectTab2 = () => this.setState({ activeTab: 'template2' });
+  setT2Position = (e) => this.setState({ t2Position: e.target.value });
+  setT2Department = (e) => this.setState({ t2Department: e.target.value });
+  setT2Employment = (e) => this.setState({ t2Employment: e.target.value });
+  setT2Location = (e) => this.setState({ t2Location: e.target.value });
+  setT2Market = (e) => this.setState({ t2Market: e.target.value });
+
+  selectBg = (key) => this.setState({ bgKey: key });
+  selectBgRockface = () => this.selectBg('rockface');
+  selectBgPeaks = () => this.selectBg('peaks');
+  selectBgClouds = () => this.selectBg('clouds');
+  selectBgStackedRocks = () => this.selectBg('stackedRocks');
+  selectBgPurpleGradient = () => this.selectBg('purpleGradient');
+
+  toggleMessageTemplate = (key) => this.setState(s => ({ templateKey: s.templateKey === key ? null : key }));
+
+  setTplField = (tplKey, fieldId, value) => {
+    this.setState(s => ({ tplValues: { ...s.tplValues, [`${tplKey}_${fieldId}`]: value } }));
+  };
+
+  buildActiveTemplateText() {
+    const tpl = MESSAGE_TEMPLATES.find(t => t.key === this.state.templateKey);
+    if (!tpl) return '';
+    const v = {};
+    tpl.fields.forEach(f => { v[f.id] = this.state.tplValues[`${tpl.key}_${f.id}`] || ''; });
+    return tpl.build(v, this.state.primaryHeading);
+  }
+
+  copyToClipboard = () => {
+    const text = this.buildActiveTemplateText();
+    const markCopied = () => {
+      this.setState({ justCopied: true });
+      clearTimeout(this._copyTimer);
+      this._copyTimer = setTimeout(() => this.setState({ justCopied: false }), 1800);
+    };
+    const fallbackCopy = () => {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        markCopied();
+      } catch (e) {}
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(markCopied).catch(fallbackCopy);
+    } else {
+      fallbackCopy();
+    }
+  };
+
+  exportJPG = () => {
+    if (this.state.exportLabel !== 'Export as JPG') return;
+    if (this.state.activeTab === 'template2') {
+      this.exportTemplate2();
+      return;
+    }
+    this.setState({ exportLabel: 'Exporting…' });
+    const logoImg = new Image();
+    const finish = (mediaSource) => {
+      try {
+        this.renderExport(mediaSource, logoImg);
+      } finally {
+        this.setState({ exportLabel: 'Export as JPG' });
+      }
+    };
+    logoImg.onload = () => {
+      const bgDef = BACKGROUNDS.find(b => b.key === this.state.bgKey) || BACKGROUNDS[0];
+      const bgImg = new Image();
+      const go = () => loadFonts().then(() => finish(bgImg));
+      bgImg.onload = go;
+      bgImg.onerror = go;
+      bgImg.src = bgDef.src;
+    };
+    logoImg.onerror = logoImg.onload;
+    logoImg.src = 'assets/wordmark-white.svg';
+  };
+
+  exportTemplate2 = () => {
+    this.setState({ exportLabel: 'Exporting…' });
+    const loadImg = (src) => new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => resolve(img);
+      img.src = src;
+    });
+    Promise.all([
+      loadImg('assets/tpl2-bg.png'),
+      loadFonts(),
+    ]).then(([bgImg]) => {
+      try {
+        this.renderExportTemplate2(bgImg);
+      } finally {
+        this.setState({ exportLabel: 'Export as JPG' });
+      }
+    });
+  };
+
+  renderExportTemplate2(bgImg) {
+    const SCALE = 2;
+    const canvas = document.createElement('canvas');
+    canvas.width = 1080 * SCALE;
+    canvas.height = 1080 * SCALE;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(SCALE, SCALE);
+
+    drawCover(ctx, bgImg, 0, 0, 1080, 1080);
+
+    ctx.textBaseline = 'alphabetic';
+    ctx.textAlign = 'left';
+    ctx.font = `500 286px ${FT}, sans-serif`;
+    try { ctx.letterSpacing = '-17px'; } catch (e) {}
+    ctx.fillStyle = 'rgb(255,255,255)';
+    ctx.fillText('We are', 24, 261);
+    ctx.fillStyle = 'rgb(255,55,0)';
+    ctx.textAlign = 'right';
+    ctx.fillText('Hiring', 1056.594, 515);
+    ctx.textAlign = 'left';
+    try { ctx.letterSpacing = '0px'; } catch (e) {}
+
+    ctx.save();
+    ctx.translate(24, 598.999);
+    const cardPath = new Path2D('M 5.1 39.348 C 5.377 17.536 23.138 0 44.951 0 L 992.099 0 C 1014.359 0 1032.304 18.233 1031.949 40.49 L 1027.625 311.841 C 1027.278 333.602 1009.538 351.061 987.775 351.061 L 812.441 351.061 C 798.209 351.061 785.056 358.651 777.935 370.973 L 749.508 420.159 C 742.386 432.481 729.234 440.071 715.002 440.071 L 40.365 440.071 C 18.156 440.071 0.231 421.917 0.514 399.709 L 5.1 39.348 Z');
+    ctx.fillStyle = 'rgb(200,133,224)';
+    ctx.fill(cardPath);
+    ctx.restore();
+
+    ctx.font = `500 22px ${FT}, sans-serif`;
+    ctx.fillStyle = 'rgb(255,255,255)';
+    try { ctx.letterSpacing = '1.76px'; } catch (e) {}
+    ctx.fillText((this.state.t2Department || '').toUpperCase(), 88, 648 + 22 * 0.85);
+    try { ctx.letterSpacing = '0px'; } catch (e) {}
+
+    ctx.font = `500 58px ${FT}, sans-serif`;
+    const titleLines = wrapCanvasText(ctx, this.state.t2Position || '', 620);
+    const titleLineH = 58 * 1.15;
+    titleLines.slice(0, 2).forEach((line, i) => {
+      ctx.fillText(line, 88, 688 + titleLineH * (i + 0.85));
+    });
+
+    const drawPill = (x, y, iconPath2D, iconSize, label) => {
+      ctx.font = `500 22px ${FT}, sans-serif`;
+      const textW = ctx.measureText(label).width;
+      const pillW = 28 + 12 + textW + 28 * 2;
+      const pillH = 52;
+      ctx.save();
+      ctx.beginPath();
+      const r = pillH / 2;
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + pillW, y, x + pillW, y + pillH, r);
+      ctx.arcTo(x + pillW, y + pillH, x, y + pillH, r);
+      ctx.arcTo(x, y + pillH, x, y, r);
+      ctx.arcTo(x, y, x + pillW, y, r);
+      ctx.closePath();
+      ctx.fillStyle = 'rgb(255,255,255)';
+      ctx.fill();
+      ctx.save();
+      ctx.translate(x + 28, y + pillH / 2 - iconSize / 2);
+      ctx.fillStyle = 'rgb(83,26,102)';
+      ctx.fill(iconPath2D);
+      ctx.restore();
+      ctx.fillStyle = 'rgb(83,26,102)';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(label, x + 28 + iconSize + 12, y + pillH / 2 + 1);
+      ctx.textBaseline = 'alphabetic';
+      ctx.restore();
+      return pillW;
+    };
+
+    const pinPath = new Path2D('M 10.05 0 C 15.6 0 20.1 4.499 20.1 10.05 C 20.1 14.556 17.134 18.37 13.048 19.646 L 11.247 25.611 C 11.088 26.139 10.601 26.5 10.05 26.5 C 9.499 26.5 9.013 26.139 8.854 25.611 L 7.052 19.646 C 2.966 18.37 0 14.556 0 10.05 C 0 4.499 4.499 0 10.05 0 Z M 10.05 2.5 C 5.88 2.5 2.5 5.88 2.5 10.05 C 2.5 13.917 5.408 17.106 9.156 17.548 C 9.417 17.578 9.723 17.6 10.05 17.6 C 10.377 17.6 10.683 17.578 10.944 17.548 C 14.693 17.106 17.6 13.917 17.6 10.05 C 17.6 5.88 14.219 2.5 10.05 2.5 Z');
+    const clockPath = new Path2D('M 13.65 0 C 21.189 0 27.3 6.112 27.3 13.65 C 27.3 21.189 21.189 27.3 13.65 27.3 C 6.112 27.3 0 21.189 0 13.65 C 0 6.112 6.112 0 13.65 0 Z M 13.65 2.5 C 7.492 2.5 2.5 7.492 2.5 13.65 C 2.5 19.808 7.493 24.8 13.65 24.8 C 19.808 24.8 24.8 19.808 24.8 13.65 C 24.8 7.493 19.808 2.5 13.65 2.5 Z M 14.048 7.707 C 14.238 7.043 14.93 6.658 15.594 6.848 C 16.257 7.037 16.642 7.73 16.452 8.394 L 15.054 13.286 L 19.334 17.566 C 19.822 18.055 19.822 18.846 19.334 19.334 C 18.846 19.822 18.055 19.822 17.566 19.334 L 12.767 14.534 C 12.446 14.213 12.324 13.743 12.448 13.307 L 14.048 7.707 Z');
+    const marketPath = new Path2D('M 15.667 3.564 C 15.616 3.377 15.349 3.426 15.33 3.619 C 15.255 4.4 15.041 5.185 14.709 5.94 C 13.87 7.852 12.259 9.636 10.102 10.882 C 7.945 12.127 5.594 12.629 3.519 12.4 C 2.493 12.287 1.521 11.992 0.677 11.511 C 0.537 11.431 0.363 11.558 0.412 11.712 C 0.589 12.271 0.818 12.807 1.096 13.313 C 1.216 13.464 1.346 13.608 1.483 13.745 C 4.111 16.372 9.169 15.981 12.81 12.341 C 15.48 9.672 16.402 6.241 15.667 3.564 Z M 17.731 6.806 C 17.684 6.621 17.421 6.649 17.393 6.837 C 17.037 9.179 15.84 11.557 13.933 13.464 C 11.605 15.791 8.578 17.059 5.767 17.035 C 5.573 17.034 5.503 17.299 5.684 17.37 C 6.709 17.777 7.828 18 8.998 18 C 13.97 18 18 13.971 18 9 C 18 8.243 17.907 7.508 17.731 6.806 Z M 0.783 5.314 C 0.393 6.182 0.136 7.123 0.04 8.112 C 0 8.519 0.103 8.934 0.371 9.243 C 1.128 10.114 2.285 10.666 3.693 10.821 C 5.398 11.009 7.413 10.6 9.308 9.506 C 11.203 8.412 12.565 6.873 13.255 5.302 C 13.773 4.121 13.903 2.955 13.637 1.932 C 13.591 1.753 13.324 1.791 13.277 1.97 C 13.101 2.636 12.712 3.258 12.213 3.785 C 11.343 4.705 10.052 5.449 8.556 5.85 C 7.061 6.251 5.57 6.252 4.357 5.89 C 3.305 5.577 2.363 4.952 1.927 3.985 C 1.868 3.855 1.687 3.825 1.605 3.942 C 1.29 4.39 1.016 4.849 0.783 5.314 Z M 11.735 0.839 C 11.619 0.468 11.236 0.272 10.856 0.192 C 10.257 0.066 9.635 0 8.998 0 C 7.123 0 5.381 0.573 3.94 1.554 C 3.748 1.685 3.579 1.851 3.473 2.058 C 3.266 2.465 3.227 2.838 3.309 3.145 C 3.438 3.627 3.907 4.099 4.811 4.368 C 5.7 4.633 6.887 4.653 8.145 4.316 C 9.404 3.979 10.422 3.368 11.059 2.694 C 11.707 2.009 11.877 1.366 11.748 0.884 C 11.744 0.869 11.74 0.854 11.735 0.839 Z');
+
+    const pillDefs = [
+      { path: pinPath, iconSize: 20.1 * (28 / 26.5), label: this.state.t2Location || '' },
+      { path: clockPath, iconSize: 28, label: this.state.t2Employment || '' },
+      { path: marketPath, iconSize: 18, label: this.state.t2Market || '' },
+    ];
+    ctx.font = `500 22px ${FT}, sans-serif`;
+    const measured = pillDefs.map(p => ({ ...p, w: 28 + 12 + ctx.measureText(p.label).width + 56 }));
+    const maxRowW = 750, pillH = 52, rowGap = 16, gap = 16;
+    const rows = [];
+    let row = [], rowW = 0;
+    measured.forEach(p => {
+      const add = row.length ? gap + p.w : p.w;
+      if (row.length && rowW + add > maxRowW) { rows.push(row); row = [p]; rowW = p.w; }
+      else { row.push(p); rowW += add; }
+    });
+    if (row.length) rows.push(row);
+    const pillsBottom = 993;
+    const blockTop = pillsBottom - rows.length * pillH - (rows.length - 1) * rowGap;
+    rows.forEach((r, ri) => {
+      let px = 62;
+      const y = blockTop + ri * (pillH + rowGap);
+      r.forEach(p => { px += drawPill(px, y, p.path, p.iconSize, p.label) + gap; });
+    });
+
+    const logoPath = new Path2D('M 146.587 34.476 L 152.915 34.476 L 152.915 12.051 L 146.587 12.051 L 146.587 34.476 Z M 149.699 8.278 C 151.981 8.278 153.849 6.497 153.849 4.192 C 153.849 1.886 151.981 0 149.699 0 C 147.417 0 145.653 1.886 145.653 4.192 C 145.653 6.497 147.417 8.278 149.699 8.278 Z M 13.071 1.257 L 0 1.257 L 0 34.371 L 6.639 34.371 L 6.639 21.796 L 12.553 21.796 C 18.673 21.796 23.757 18.129 23.757 11.527 C 23.757 4.925 19.296 1.257 13.071 1.257 Z M 12.76 15.823 L 6.639 15.823 L 6.639 7.021 L 13.071 7.021 C 15.665 7.021 17.74 8.698 17.74 11.422 C 17.74 14.147 15.561 15.823 12.76 15.823 Z M 162.667 21.796 C 162.667 26.093 165.779 29.132 169.721 29.132 C 173.663 29.132 176.775 26.093 176.775 21.796 C 176.775 17.5 173.767 14.356 169.721 14.356 C 165.675 14.356 162.667 17.5 162.667 21.796 Z M 156.546 21.796 C 156.546 14.147 162.252 8.488 169.721 8.488 C 177.19 8.488 183 14.147 183 21.796 C 183 29.446 177.294 35 169.721 35 C 162.148 35 156.546 29.446 156.546 21.796 Z M 120.029 15.928 L 120.029 34.476 L 126.15 34.476 L 126.15 16.766 C 126.15 15.299 126.98 14.566 128.328 14.566 L 133.515 14.566 C 134.864 14.566 135.694 15.299 135.694 16.766 L 135.694 34.476 L 141.815 34.476 L 141.815 15.928 C 141.815 12.051 138.599 8.802 134.656 8.802 L 127.187 8.802 C 123.245 8.802 120.029 12.051 120.029 15.928 Z M 97.206 21.796 C 97.206 26.093 100.214 29.132 104.26 29.132 C 108.306 29.132 111.315 26.093 111.315 21.796 C 111.315 17.5 108.202 14.356 104.26 14.356 C 100.318 14.356 97.206 17.5 97.206 21.796 Z M 91.085 21.796 C 91.085 14.147 96.687 8.488 104.26 8.488 C 111.833 8.488 117.435 14.147 117.435 21.796 C 117.435 29.446 111.833 35 104.26 35 C 96.687 35 91.085 29.446 91.085 21.796 Z M 67.328 26.617 L 73.656 26.617 C 73.864 29.132 75.731 30.075 78.429 30.075 C 80.607 30.075 82.682 29.446 82.682 27.246 C 82.682 25.045 80.607 24.731 78.844 24.416 L 76.354 23.997 C 71.582 23.159 67.951 21.272 67.951 16.557 C 67.951 11.422 72.827 8.488 78.117 8.488 C 83.408 8.488 88.284 11.213 88.491 16.557 L 82.371 16.557 C 82.163 14.251 80.503 13.413 78.117 13.413 C 75.731 13.413 74.175 14.042 74.175 16.033 C 74.175 17.814 75.731 18.443 77.599 18.757 L 80.296 19.177 C 84.964 19.91 88.803 21.587 88.803 26.512 C 88.803 32.066 84.031 35 78.325 35 C 72.93 35 67.847 32.066 67.328 26.617 Z M 52.182 15.928 L 52.182 34.476 L 58.303 34.476 L 58.303 16.766 C 58.303 15.299 59.133 14.566 60.481 14.566 L 66.187 14.566 L 66.187 8.802 L 59.34 8.802 C 55.398 8.802 52.182 12.051 52.182 15.928 Z M 30.915 19.072 L 43.156 19.072 C 42.638 16.138 40.148 14.042 37.036 14.042 C 33.923 14.042 31.434 16.138 30.915 19.072 Z M 24.172 21.796 C 24.172 14.356 29.566 8.488 36.828 8.488 C 45.024 8.488 49.277 14.775 49.277 21.272 C 49.277 22.111 49.173 22.949 49.07 23.787 L 30.707 23.787 C 30.915 27.141 33.612 29.132 37.036 29.132 C 39.214 29.132 41.185 28.084 42.638 26.198 L 47.306 29.551 C 44.609 33.219 40.874 35 36.828 35 C 29.67 35 24.172 29.237 24.172 21.796 Z');
+    ctx.save();
+    ctx.translate(826, 984);
+    ctx.fillStyle = this.props.logoColor ?? '#FFFFFF';
+    ctx.fill(logoPath);
+    ctx.restore();
+
+    canvas.toBlob((blob) => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'social-post-template2.jpg';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    }, 'image/jpeg', 0.92);
+  }
+
+  renderExport(mediaSource, logoImg) {
+    const SCALE = 2;
+    const canvas = document.createElement('canvas');
+    canvas.width = 1080 * SCALE;
+    canvas.height = 1080 * SCALE;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(SCALE, SCALE);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, 1080, 1080);
+
+    drawCover(ctx, mediaSource, 0, 0, 1080, 1080);
+    const g = ctx.createLinearGradient(0, 0, 0, 1080);
+    g.addColorStop(0, 'rgba(6,27,71,0.15)');
+    g.addColorStop(0.5281, 'rgba(6,27,71,0.15)');
+    g.addColorStop(1, 'rgba(184,92,214,0.15)');
+    ctx.fillStyle = g;
+    ctx.fillRect(-373.791, -22.827, 2418.3, 1355.311);
+
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = 'rgb(255,255,255)';
+
+    const sec = fitCanvasText(ctx, this.state.secondaryHeading || '', 500, 392, 82, 68.48084259033203, 24, 1.0);
+    const secCX = 343.831 + 392 / 2, secCY = 65.627 + 82 / 2;
+    const secLineH = sec.size * 1.0;
+    const secTotalH = sec.lines.length * secLineH;
+    sec.lines.forEach((line, i) => {
+      const y = secCY - secTotalH / 2 + secLineH * (i + 0.5);
+      ctx.fillText(line, secCX, y);
+    });
+
+    ctx.font = `500 140px ${FT}, sans-serif`;
+    const pri = { size: 140, lines: (this.state.primaryHeading || '').split(/\s+/).filter(Boolean) };
+    const priCX = 276 + 528 / 2, priCY = 422.299 + 244 / 2;
+    const priLineH = pri.size * 0.87;
+    const priTotalH = pri.lines.length * priLineH;
+    pri.lines.forEach((line, i) => {
+      const y = priCY - priTotalH / 2 + priLineH * (i + 0.5);
+      ctx.fillText(line, priCX, y);
+    });
+
+    const badgeX = 407.548, badgeY = 984.412, badgeW = 266.942, badgeH = 480.867, r = 39.652;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(badgeX + r, badgeY);
+    ctx.arcTo(badgeX + badgeW, badgeY, badgeX + badgeW, badgeY + badgeH, r);
+    ctx.arcTo(badgeX + badgeW, badgeY + badgeH, badgeX, badgeY + badgeH, r);
+    ctx.arcTo(badgeX, badgeY + badgeH, badgeX, badgeY, r);
+    ctx.arcTo(badgeX, badgeY, badgeX + badgeW, badgeY, r);
+    ctx.closePath();
+    ctx.clip();
+    ctx.fillStyle = 'rgb(106,33,131)';
+    ctx.fillRect(badgeX, badgeY, badgeW, badgeH);
+    const bg2 = ctx.createLinearGradient(badgeX, 0, badgeX + badgeW, 0);
+    bg2.addColorStop(0, 'rgba(106,33,131,0.2)');
+    bg2.addColorStop(0.3323, 'rgba(255,255,255,0.2)');
+    bg2.addColorStop(1, 'rgba(255,255,255,0.2)');
+    ctx.fillStyle = bg2;
+    ctx.fillRect(badgeX, badgeY, badgeW, badgeH);
+    ctx.drawImage(logoImg, 458.896, 1014.746, 164.437, 31.001);
+    ctx.globalCompositeOperation = 'source-in';
+    ctx.fillStyle = this.props.logoColor ?? '#FFFFFF';
+    ctx.fillRect(458.896, 1014.746, 164.437, 31.001);
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.restore();
+
+    canvas.toBlob((blob) => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'social-post.jpg';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    }, 'image/jpeg', 0.92);
+  }
+
+  renderVals() {
+    const activeBg = BACKGROUNDS.find(b => b.key === this.state.bgKey) || BACKGROUNDS[0];
+    return {
+      primaryHeading: this.state.primaryHeading,
+      secondaryHeading: this.state.secondaryHeading,
+      primarySize: this.state.primarySize,
+      secondarySize: this.state.secondarySize,
+      exportLabel: this.state.exportLabel,
+      activeBgSrc: activeBg.src,
+      setPrimary: this.setPrimary,
+      setSecondary: this.setSecondary,
+      exportJPG: this.exportJPG,
+      primaryRef: this.primaryRef,
+      primaryWords: (this.state.primaryHeading || '').split(/\s+/).filter(Boolean),
+      secondaryRef: this.secondaryRef,
+      stageRef: this.stageRef,
+      stageOuterRef: this.stageOuterRef,
+      logoColor: this.props.logoColor ?? '#FFFFFF',
+      isTemplate1: this.state.activeTab === 'template1',
+      isTemplate2: this.state.activeTab === 'template2',
+      selectTab1: this.selectTab1,
+      selectTab2: this.selectTab2,
+      tab1Style: `flex:1; padding:8px 0; border:none; border-radius:calc(var(--radius-md) - 2px); font-size:13px; font-weight:600; font-family:var(--font-ui); cursor:pointer; background:${this.state.activeTab === 'template1' ? '#fff' : 'transparent'}; color:${this.state.activeTab === 'template1' ? 'var(--color-fg)' : 'var(--color-fg-secondary)'}; box-shadow:${this.state.activeTab === 'template1' ? 'var(--shadow-sm)' : 'none'};`,
+      tab2Style: `flex:1; padding:8px 0; border:none; border-radius:calc(var(--radius-md) - 2px); font-size:13px; font-weight:600; font-family:var(--font-ui); cursor:pointer; background:${this.state.activeTab === 'template2' ? '#fff' : 'transparent'}; color:${this.state.activeTab === 'template2' ? 'var(--color-fg)' : 'var(--color-fg-secondary)'}; box-shadow:${this.state.activeTab === 'template2' ? 'var(--shadow-sm)' : 'none'};`,
+      t2Position: this.state.t2Position,
+      t2Department: this.state.t2Department,
+      t2Employment: this.state.t2Employment,
+      t2Location: this.state.t2Location,
+      t2Market: this.state.t2Market,
+      setT2Position: this.setT2Position,
+      setT2Department: this.setT2Department,
+      setT2Employment: this.setT2Employment,
+      setT2Location: this.setT2Location,
+      setT2Market: this.setT2Market,
+      selectBgRockface: this.selectBgRockface,
+      selectBgPeaks: this.selectBgPeaks,
+      selectBgClouds: this.selectBgClouds,
+      selectBgStackedRocks: this.selectBgStackedRocks,
+      selectBgPurpleGradient: this.selectBgPurpleGradient,
+      templates: MESSAGE_TEMPLATES.map(tpl => {
+        const selected = this.state.templateKey === tpl.key;
+        return {
+          key: tpl.key,
+          label: tpl.label,
+          selected,
+          onToggle: () => this.toggleMessageTemplate(tpl.key),
+          borderColor: selected ? 'var(--color-accent)' : 'var(--color-border-strong)',
+          optionStyle: `display:flex; align-items:center; gap:10px; padding:12px 14px; border:1px solid ${selected ? 'var(--color-accent)' : 'var(--color-border)'}; border-radius:var(--radius-md); background:var(--color-bg-subtle); cursor:pointer;`,
+          fields: tpl.fields.map(f => ({
+            id: f.id,
+            label: f.label,
+            placeholder: f.placeholder,
+            multiline: !!f.multiline,
+            single: !f.multiline,
+            value: this.state.tplValues[`${tpl.key}_${f.id}`] || '',
+            onChange: (e) => this.setTplField(tpl.key, f.id, e.target.value),
+          })),
+        };
+      }),
+      hasActiveTemplate: !!this.state.templateKey,
+      activeTemplateText: this.buildActiveTemplateText(),
+      copyToClipboard: this.copyToClipboard,
+      justCopied: this.state.justCopied,
+      notCopied: !this.state.justCopied,
+      bgSelected: {
+        rockface: this.state.bgKey === 'rockface',
+        peaks: this.state.bgKey === 'peaks',
+        clouds: this.state.bgKey === 'clouds',
+        stackedRocks: this.state.bgKey === 'stackedRocks',
+        purpleGradient: this.state.bgKey === 'purpleGradient',
+      },
+      bgTileStyle: {
+        rockface: tileStyle(this.state.bgKey === 'rockface'),
+        peaks: tileStyle(this.state.bgKey === 'peaks'),
+        clouds: tileStyle(this.state.bgKey === 'clouds'),
+        stackedRocks: tileStyle(this.state.bgKey === 'stackedRocks'),
+        purpleGradient: tileStyle(this.state.bgKey === 'purpleGradient'),
+      },
+    };
+  }
+}
+
+</script>
+</body>
+</html>
