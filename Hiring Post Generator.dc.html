@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/personio-design-system-eefd88d9-c8b9-4275-8938-a4826b4ed363/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/personio-design-system-eefd88d9-c8b9-4275-8938-a4826b4ed363/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/personio-design-system-eefd88d9-c8b9-4275-8938-a4826b4ed363/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/personio-design-system-eefd88d9-c8b9-4275-8938-a4826b4ed363/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/personio-design-system-eefd88d9-c8b9-4275-8938-a4826b4ed363/tokens/elevation.css">
+  <link rel="stylesheet" href="_ds/personio-design-system-eefd88d9-c8b9-4275-8938-a4826b4ed363/tokens/base.css">
+  <link rel="stylesheet" href="_ds/personio-design-system-eefd88d9-c8b9-4275-8938-a4826b4ed363/styles.css">
+  <script src="_ds/personio-design-system-eefd88d9-c8b9-4275-8938-a4826b4ed363/_ds_bundle.js"></script>
+  <script src="templates.js"></script>
+  <style>
+    body { margin: 0; background: var(--color-bg-subtle); }
+    a { color: var(--color-accent); }
+    a:hover { color: var(--color-accent-hover); }
+  </style>
+</helmet>
+<div style="display:flex;flex-direction:column;{{ shellSize }}background:var(--color-bg-subtle);font-family:var(--font-sans)">
+
+  <header style="flex-shrink:0;min-height:56px;display:flex;align-items:center;flex-wrap:wrap;gap:{{ headerGap }};padding:{{ headerPad }};background:var(--color-bg);border-bottom:1px solid var(--color-border)">
+    <img src="assets/personio-wordmark.svg" alt="Personio" style="height:17px;width:auto;display:block" />
+    <span style="width:1px;height:22px;background:var(--color-border)"></span>
+    <nav style="display:flex;gap:4px">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="2">
+        <button type="button" onClick="{{ t.select }}" style="font-family:inherit;font-size:15px;font-weight:{{ t.weight }};padding:8px 16px;border:0;border-radius:7px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background 160ms cubic-bezier(0.4,0,0.2,1);background:{{ t.bg }};color:{{ t.fg }}"><x-import component-from-global-scope="PersonioDesignSystem_eefd88.Icon" name="{{ t.icon }}" size="17" hint-size="17px,17px"></x-import>{{ t.label }}</button>
+      </sc-for>
+    </nav>
+    <span style="flex:1"></span>
+    <span style="display:{{ metaDisplay }};font-size:12px;font-weight:500;color:var(--color-fg-tertiary)">Employer branding · internal</span>
+  </header>
+
+  <main style="flex:1;display:flex;min-height:0;flex-direction:{{ mainDir }}">
+
+    <aside style="width:{{ asideWidth }};flex-shrink:0;display:flex;flex-direction:column;min-height:0;background:var(--color-bg);border-right:{{ asideBorder }}">
+      <div style="flex:1;overflow-y:auto;padding:28px 24px 32px;display:flex;flex-direction:column;gap:26px">
+
+        <sc-if value="{{ isSocial }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:26px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="font-size:10px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--color-accent)">Social post</div>
+              <h3 style="margin:0;font-size:22px;font-weight:700;letter-spacing:-0.02em;color:var(--color-fg)">Hiring Post Generator</h3>
+              <p style="margin:0;font-size:12px;font-weight:500;line-height:1.5;color:var(--color-fg-secondary);text-wrap:pretty">Use our on-brand job template to create a visual post when sharing open roles and job opportunities on your personal LinkedIn or any other channel.</p>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="font-size:10px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--color-fg-tertiary)">Format</div>
+              <div style="display:flex;gap:8px">
+                <sc-for list="{{ visuals }}" as="v" hint-placeholder-count="3">
+                  <button type="button" onClick="{{ v.select }}" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:9px;padding:12px 6px 10px;border-radius:8px;cursor:pointer;font-family:inherit;transition:background 160ms cubic-bezier(0.4,0,0.2,1);background:{{ v.bg }};border:1px solid {{ v.brd }}">
+                    <span style="display:flex;align-items:flex-end;height:30px">
+                      <span style="display:block;height:{{ v.thumbH }}px;width:{{ v.thumbW }}px;border-radius:2px;background:{{ v.ink }}"></span>
+                    </span>
+                    <span style="font-size:12px;font-weight:500;color:{{ v.fg }}">{{ v.ratio }}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                  <label style="font-size:12px;font-weight:500;color:var(--grey-70)">Job title</label>
+                  <button type="button" onClick="{{ openModal }}" style="display:inline-flex;align-items:center;gap:5px;padding:0;border:0;background:none;cursor:pointer;font-family:inherit;font-size:11px;font-weight:500;color:var(--color-accent)" style-hover="color:var(--color-accent-hover)">
+                    <span style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;border:1px solid currentColor;font-size:9px;font-weight:600;line-height:1">i</span>
+                    Guidelines
+                  </button>
+                </div>
+                <x-import component-from-global-scope="PersonioDesignSystem_eefd88.Input" value="{{ jobTitle }}" on-change="{{ setJobTitle }}" placeholder="Account Executive" width="100%" hint-size="100%,38px"></x-import>
+                <span style="font-size:11px;font-weight:500;color:var(--color-fg-tertiary)">Shared with all three visuals and every message.</span>
+              </div>
+
+              <sc-for list="{{ socialFields }}" as="f" hint-placeholder-count="2">
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <label style="font-size:12px;font-weight:500;color:var(--grey-70)">{{ f.label }}</label>
+                  <x-import component-from-global-scope="PersonioDesignSystem_eefd88.Input" value="{{ f.value }}" on-change="{{ f.onChange }}" placeholder="{{ f.placeholder }}" width="100%" hint-size="100%,38px"></x-import>
+                </div>
+              </sc-for>
+            </div>
+
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isMessage }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:26px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="font-size:10px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--color-accent)">Message generator</div>
+              <h3 style="margin:0;font-size:22px;font-weight:700;letter-spacing:-0.02em;color:var(--color-fg)">Outreach copy</h3>
+              <p style="margin:0;font-size:12px;font-weight:500;line-height:1.5;color:var(--color-fg-secondary);text-wrap:pretty">Pick a template, fill in the variables. The wording stays as approved.</p>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="font-size:10px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--color-fg-tertiary)">Template</div>
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <x-import component-from-global-scope="PersonioDesignSystem_eefd88.Select" options="{{ msgLabels }}" value="{{ msgLabel }}" on-change="{{ selectMsg }}" width="100%" hint-size="100%,38px"></x-import>
+                <span style="font-size:11px;font-weight:500;color:var(--color-fg-tertiary)">{{ msgHint }}</span>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:18px">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                  <label style="font-size:12px;font-weight:500;color:var(--grey-70)">Job title</label>
+                  <button type="button" onClick="{{ openModal }}" style="display:inline-flex;align-items:center;gap:5px;padding:0;border:0;background:none;cursor:pointer;font-family:inherit;font-size:11px;font-weight:500;color:var(--color-accent)" style-hover="color:var(--color-accent-hover)">
+                    <span style="display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;border:1px solid currentColor;font-size:9px;font-weight:600;line-height:1">i</span>
+                    Guidelines
+                  </button>
+                </div>
+                <x-import component-from-global-scope="PersonioDesignSystem_eefd88.Input" value="{{ jobTitle }}" on-change="{{ setJobTitle }}" placeholder="Account Executive" width="100%" hint-size="100%,38px"></x-import>
+                <span style="font-size:11px;font-weight:500;color:var(--color-fg-tertiary)">Same field as the social visuals.</span>
+              </div>
+
+              <sc-for list="{{ msgFields }}" as="f" hint-placeholder-count="3">
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <label style="font-size:12px;font-weight:500;color:var(--grey-70)">{{ f.label }}</label>
+                  <sc-if value="{{ f.multiline }}" hint-placeholder-val="{{ false }}">
+                    <x-import component-from-global-scope="PersonioDesignSystem_eefd88.Textarea" value="{{ f.value }}" on-change="{{ f.onChange }}" placeholder="{{ f.placeholder }}" rows="3" width="100%" hint-size="100%,76px"></x-import>
+                  </sc-if>
+                  <sc-if value="{{ f.single }}" hint-placeholder-val="{{ true }}">
+                    <x-import component-from-global-scope="PersonioDesignSystem_eefd88.Input" value="{{ f.value }}" on-change="{{ f.onChange }}" placeholder="{{ f.placeholder }}" width="100%" hint-size="100%,38px"></x-import>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="flex-shrink:0;padding:16px 24px;border-top:1px solid var(--color-border);display:flex;flex-direction:column;gap:8px">
+        <sc-if value="{{ isSocial }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <x-import component-from-global-scope="PersonioDesignSystem_eefd88.Button" dc-props="{{ exportBtn }}" hint-size="100%,44px">Export as JPG</x-import>
+            <span style="font-size:11px;font-weight:500;color:var(--color-fg-tertiary);text-align:center">{{ exportNote }}</span>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isMessage }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <x-import component-from-global-scope="PersonioDesignSystem_eefd88.Button" dc-props="{{ copyBtn }}" hint-size="100%,44px">{{ copyLabel }}</x-import>
+            <span style="font-size:11px;font-weight:500;color:var(--color-fg-tertiary);text-align:center">Line breaks and paragraphs are preserved.</span>
+          </div>
+        </sc-if>
+      </div>
+    </aside>
+
+    <section style="flex:1;min-width:0;display:flex;overflow:auto;padding:{{ previewPad }}">
+      <sc-if value="{{ isSocial }}" hint-placeholder-val="{{ true }}">
+        <div style="margin:auto;display:flex;flex-direction:column;align-items:center;gap:14px">
+          <canvas ref="{{ canvasRef }}" style="max-width:{{ canvasMaxW }};max-height:{{ canvasMaxH }};width:auto;height:auto;display:block;box-shadow:var(--shadow-md)"></canvas>
+          <div style="font-size:11px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:var(--color-fg-tertiary)">{{ tplCaption }}</div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isMessage }}" hint-placeholder-val="{{ false }}">
+        <div style="margin:auto;width:100%;max-width:680px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px">
+            <span style="font-size:11px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:var(--color-fg-tertiary)">{{ msgLabel }}</span>
+            <span style="font-size:11px;font-weight:500;color:var(--color-fg-tertiary)">{{ msgMeta }}</span>
+          </div>
+          <div style="background:var(--color-bg);border-radius:16px;padding:28px 30px;box-shadow:var(--shadow-sm);white-space:pre-wrap;font-size:14px;font-weight:400;line-height:1.6;color:var(--color-fg);text-wrap:pretty">
+<sc-for list="{{ segments }}" as="g" hint-placeholder-count="3"><span>{{ g.text }}{{ g.node }}</span></sc-for></div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:11px;font-weight:500;color:var(--color-fg-tertiary)">
+            <span style="width:9px;height:9px;border-radius:2px;background:var(--color-accent-subtle);border:1px solid var(--lavender-30)"></span>
+            Highlighted values are editable here or in the sidebar &mdash; both stay in sync.
+          </div>
+        </div>
+      </sc-if>
+    </section>
+  </main>
+
+  <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(20,20,20,0.45)">
+      <div onClick="{{ stopEvt }}" style="width:100%;max-width:520px;background:var(--color-bg);border-radius:16px;padding:30px 32px 26px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
+          <h3 style="margin:0;font-size:22px;font-weight:700;letter-spacing:-0.02em;color:var(--color-fg)">Job title guidelines</h3>
+          <button type="button" onClick="{{ closeModal }}" style="flex-shrink:0;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:7px;background:var(--color-bg-subtle);cursor:pointer;font-family:inherit;font-size:15px;line-height:1;color:var(--color-fg-secondary)" style-hover="background:#F0F0EF">&times;</button>
+        </div>
+        <p style="margin:0;font-size:16px;font-weight:500;line-height:1.5;color:var(--color-fg);text-wrap:pretty">Keep job titles short and easy to scan.</p>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:8px;background:var(--color-success-subtle)">
+            <x-import component-from-global-scope="PersonioDesignSystem_eefd88.Badge" tone="success" hint-size="46px,20px">Use</x-import>
+            <span style="font-size:15px;font-weight:500;color:var(--color-fg)">Account Executive</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:8px;background:var(--color-error-subtle)">
+            <x-import component-from-global-scope="PersonioDesignSystem_eefd88.Badge" tone="error" hint-size="72px,20px">Instead of</x-import>
+            <span style="font-size:15px;font-weight:500;color:var(--color-fg)">Account Executive &ndash; Medium Business (d/f/m)</span>
+          </div>
+        </div>
+        <p style="margin:0;font-size:13px;font-weight:500;line-height:1.55;color:var(--color-fg-secondary);text-wrap:pretty">Details such as seniority, market, employment type, or other information can be included in the social copy instead. The visual headline should remain short and clean.</p>
+        <div style="display:flex;justify-content:flex-end;padding-top:2px">
+          <x-import component-from-global-scope="PersonioDesignSystem_eefd88.Button" variant="secondary" dc-props="{{ modalCloseBtn }}" hint-size="86px,40px">Close</x-import>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+var TokenSpan = (function () {
+  function T(props) {
+    React.Component.call(this, props);
+    this.ref = React.createRef();
+  }
+  T.prototype = Object.create(React.Component.prototype);
+  T.prototype.constructor = T;
+  T.prototype.text = function () { return this.props.value || this.props.placeholder; };
+  T.prototype.componentDidMount = function () { this.ref.current.textContent = this.text(); };
+  T.prototype.componentDidUpdate = function () {
+    var el = this.ref.current;
+    if (document.activeElement !== el && el.textContent !== this.text()) el.textContent = this.text();
+  };
+  T.prototype.render = function () {
+    var p = this.props;
+    var empty = !p.value;
+    return React.createElement('span', {
+      ref: this.ref,
+      contentEditable: true,
+      suppressContentEditableWarning: true,
+      spellCheck: false,
+      title: p.label,
+      onFocus: (e) => { if (!p.value) e.currentTarget.textContent = ''; },
+      onInput: (e) => p.onInput(e.currentTarget.textContent),
+      onBlur: (e) => {
+        var v = e.currentTarget.textContent.trim();
+        p.onInput(v);
+        if (!v) e.currentTarget.textContent = p.placeholder;
+      },
+      onKeyDown: (e) => {
+        if (e.key === 'Enter' && !p.multi) e.preventDefault();
+        if (e.key === 'Escape') e.currentTarget.blur();
+      },
+      onPaste: (e) => {
+        e.preventDefault();
+        var t = (e.clipboardData || window.clipboardData).getData('text');
+        document.execCommand('insertText', false, p.multi ? t : t.replace(/\s+/g, ' '));
+      },
+      style: {
+        outline: 'none',
+        borderRadius: '3px',
+        padding: '0 3px',
+        margin: '0 -1px',
+        cursor: 'text',
+        color: empty ? 'var(--color-accent)' : 'var(--color-fg)',
+        background: empty ? 'var(--color-accent-subtle)' : 'transparent',
+        boxShadow: empty ? 'none' : 'inset 0 -1px 0 var(--lavender-30)',
+        transition: 'background 160ms cubic-bezier(0.4,0,0.2,1)'
+      }
+    });
+  };
+  return T;
+})();
+
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.canvasRef = React.createRef();
+    this.state = {
+      tab: props.defaultTab === 'message' ? 'message' : 'social',
+      tpl: props.defaultTemplate || 't01',
+      jobTitle: 'Account Executive',
+      location: 'Munich | DACH',
+      cta: 'Apply: personio.com/careers',
+      msg: 'social',
+      vals: {},
+      modalOpen: false,
+      copied: false,
+      ready: false,
+      narrow: typeof window !== 'undefined' && window.innerWidth < 880
+    };
+  }
+
+  P() { return window.PGEN || { visuals: [], messages: [], fields: {}, buildMessage: function () { return ''; } }; }
+
+  componentDidMount() {
+    this.repaint();
+    this._key = (e) => { if (e.key === 'Escape' && this.state.modalOpen) this.setState({ modalOpen: false }); };
+    window.addEventListener('keydown', this._key);
+    this._resize = () => {
+      var n = window.innerWidth < 880;
+      if (n !== this.state.narrow) this.setState({ narrow: n });
+    };
+    window.addEventListener('resize', this._resize);
+    this._resize();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this._key);
+    window.removeEventListener('resize', this._resize);
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (this._copyTimer) clearTimeout(this._copyTimer);
+  }
+
+  componentDidUpdate() { this.repaint(); }
+
+  repaint() {
+    if (this.state.tab !== 'social' || !window.PGEN) return;
+    if (this._raf) cancelAnimationFrame(this._raf);
+    this._raf = requestAnimationFrame(() => {
+      if (!this.canvasRef.current) return;
+      window.PGEN.loadAssets().then(() => {
+        var c = this.canvasRef.current;
+        if (c) window.PGEN.paint(c, this.state.tpl, this.state, 1);
+      });
+    });
+  }
+
+  tplObj() {
+    var vs = this.P().visuals;
+    return vs.filter((t) => t.key === this.state.tpl)[0] || vs[0];
+  }
+
+  msgObj() {
+    var ms = this.P().messages;
+    return ms.filter((m) => m.key === this.state.msg)[0] || ms[0];
+  }
+
+  messageText() {
+    var m = this.msgObj();
+    return m ? this.P().buildMessage(m, this.state.vals, this.state.jobTitle) : '';
+  }
+
+  setVal(key, v) {
+    this.setState((s) => {
+      var next = Object.assign({}, s.vals);
+      next[key] = v;
+      return { vals: next };
+    });
+  }
+
+  async exportJpg() {
+    var tpl = this.tplObj();
+    if (!tpl || !window.PGEN) return;
+    await window.PGEN.loadAssets();
+    var scale = Math.max(1, Math.min(4, this.props.exportScale || 2));
+    var c = document.createElement('canvas');
+    window.PGEN.paint(c, tpl.key, this.state, scale);
+    var url;
+    try { url = c.toDataURL('image/jpeg', 0.95); } catch (e) { return; }
+    var slug = (this.state.jobTitle || 'hiring').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'hiring';
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'personio-were-hiring-' + slug + '-' + (tpl.w * scale) + 'x' + (tpl.h * scale) + '.jpg';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  copyMessage() {
+    var text = this.messageText();
+    var done = () => {
+      this.setState({ copied: true });
+      if (this._copyTimer) clearTimeout(this._copyTimer);
+      this._copyTimer = setTimeout(() => this.setState({ copied: false }), 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, () => this.legacyCopy(text, done));
+    } else {
+      this.legacyCopy(text, done);
+    }
+  }
+
+  legacyCopy(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) {}
+    ta.remove();
+  }
+
+  renderVals() {
+    var P = this.P();
+    var s = this.state;
+    var isSocial = s.tab === 'social';
+    var tpl = this.tplObj();
+    var msg = this.msgObj();
+    var text = this.messageText();
+    var scale = Math.max(1, Math.min(4, this.props.exportScale || 2));
+
+    var tabs = [{ key: 'social', label: 'Social post', icon: 'users' }, { key: 'message', label: 'Message generator', icon: 'mail' }].map((t) => ({
+      label: t.label,
+      icon: t.icon,
+      weight: s.tab === t.key ? 700 : 500,
+      bg: s.tab === t.key ? 'var(--color-accent-subtle)' : 'transparent',
+      fg: s.tab === t.key ? 'var(--color-accent-deep)' : 'var(--color-fg-secondary)',
+      select: () => this.setState({ tab: t.key })
+    }));
+
+    var visuals = P.visuals.map((v) => {
+      var on = v.key === s.tpl;
+      var h = v.h >= v.w ? 30 : Math.round(30 * v.h / v.w);
+      return {
+        ratio: v.ratio,
+        thumbH: h,
+        thumbW: Math.round(h * v.w / v.h),
+        bg: on ? 'var(--color-accent-subtle)' : 'var(--color-bg)',
+        brd: on ? 'var(--color-accent)' : 'var(--color-border)',
+        ink: on ? 'var(--color-accent)' : 'var(--grey-30)',
+        fg: on ? 'var(--color-accent-deep)' : 'var(--color-fg-secondary)',
+        select: () => this.setState({ tpl: v.key })
+      };
+    });
+
+    var msgLabels = P.messages.map((m) => m.label);
+
+    var socialFields = [
+      { label: 'Location / region', key: 'location', placeholder: 'Munich | DACH' },
+      { label: 'CTA', key: 'cta', placeholder: 'Apply: personio.com/careers' }
+    ].map((f) => ({
+      label: f.label,
+      placeholder: f.placeholder,
+      value: s[f.key],
+      onChange: (v) => { var o = {}; o[f.key] = v; this.setState(o); }
+    }));
+
+    var msgFields = (msg ? msg.fields : []).map((k) => {
+      var def = P.fields[k] || {};
+      return {
+        label: def.label || k,
+        placeholder: def.ph || '',
+        value: s.vals[k] || '',
+        multiline: !!def.multi,
+        single: !def.multi,
+        onChange: (v) => this.setVal(k, v)
+      };
+    });
+
+    var words = text.trim() ? text.trim().split(/\s+/).length : 0;
+
+    var segs = (msg && P.buildSegments ? P.buildSegments(msg, s.vals, s.jobTitle) : []).map((g, i) => {
+      if (g.kind === 'text') return { key: 'x' + i, isText: true, isToken: false, text: g.text, node: null };
+      return {
+        key: 'k' + i + g.key, isText: false, isToken: true, text: '',
+        node: React.createElement(TokenSpan, {
+          key: g.key + i,
+          value: g.value,
+          placeholder: g.ph,
+          label: g.label,
+          multi: g.multi,
+          onInput: (v) => { if (g.key === 'jobTitle') this.setState({ jobTitle: v }); else this.setVal(g.key, v); }
+        })
+      };
+    });
+
+    var nw = s.narrow;
+    return {
+      shellSize: nw ? 'min-height:100vh;' : 'height:100vh;overflow:hidden;',
+      headerPad: nw ? '0 16px' : '0 24px',
+      headerGap: nw ? '12px' : '20px',
+      metaDisplay: nw ? 'none' : 'inline',
+      mainDir: nw ? 'column' : 'row',
+      asideWidth: nw ? '100%' : '360px',
+      asideBorder: nw ? '0' : '1px solid var(--color-border)',
+      previewPad: nw ? '20px 16px' : '40px',
+      canvasMaxH: nw ? '52vh' : 'calc(100vh - 210px)',
+      canvasMaxW: nw ? '420px' : '100%',
+      isSocial: isSocial,
+      isMessage: !isSocial,
+      tabs: tabs,
+      visuals: visuals,
+      msgLabels: msgLabels,
+      msgHint: msg ? msg.hint : '',
+      selectMsg: (label) => {
+        var hit = P.messages.filter((m) => m.label === label)[0];
+        if (hit) this.setState({ msg: hit.key, copied: false });
+      },
+      socialFields: socialFields,
+      msgFields: msgFields,
+      jobTitle: s.jobTitle,
+      setJobTitle: (v) => this.setState({ jobTitle: v }),
+      canvasRef: this.canvasRef,
+      tplCaption: tpl ? tpl.label + ' · ' + tpl.ratio + ' · ' + tpl.w + ' × ' + tpl.h : '',
+      exportNote: tpl ? 'JPG at ' + (tpl.w * scale) + ' × ' + (tpl.h * scale) + ' px' : '',
+      msgLabel: msg ? msg.label : '',
+      msgMeta: words + ' words · ' + text.length + ' characters',
+      previewText: text,
+      segments: segs,
+      copyLabel: s.copied ? 'Copied!' : 'Copy message',
+      copied: s.copied,
+      modalOpen: s.modalOpen,
+      openModal: () => this.setState({ modalOpen: true }),
+      closeModal: () => this.setState({ modalOpen: false }),
+      stopEvt: (e) => e.stopPropagation(),
+      exportBtn: { onClick: () => this.exportJpg(), size: 'lg', style: { width: '100%' } },
+      copyBtn: { onClick: () => this.copyMessage(), size: 'lg', style: { width: '100%' } },
+      modalCloseBtn: { onClick: () => this.setState({ modalOpen: false }) }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+/* FT Regola Neue — Personio's primary typeface (Formula Type, Piero Di Biase) */
+@font-face{font-family:"FT Regola Neue";src:url("../fonts/FTRegolaNeue-Light.woff2") format("woff2");font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:"FT Regola Neue";src:url("../fonts/FTRegolaNeue-LightItalic.woff2") format("woff2");font-weight:300;font-style:italic;font-display:swap}
+@font-face{font-family:"FT Regola Neue";src:url("../fonts/FTRegolaNeue-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"FT Regola Neue";src:url("../fonts/FTRegolaNeue-RegularItalic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"FT Regola Neue";src:url("../fonts/FTRegolaNeue-Medium.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:"FT Regola Neue";src:url("../fonts/FTRegolaNeue-MediumItalic.woff2") format("woff2");font-weight:500;font-style:italic;font-display:swap}
+@font-face{font-family:"FT Regola Neue";src:url("../fonts/FTRegolaNeue-Semibold.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"FT Regola Neue";src:url("../fonts/FTRegolaNeue-SemiboldItalic.woff2") format("woff2");font-weight:600;font-style:italic;font-display:swap}
+@font-face{font-family:"FT Regola Neue";src:url("../fonts/FTRegolaNeue-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"FT Regola Neue";src:url("../fonts/FTRegolaNeue-BoldItalic.woff2") format("woff2");font-weight:700;font-style:italic;font-display:swap}
+@font-face{font-family:"FT Regola Neue";src:url("../fonts/FTRegolaNeue-Heavy.woff2") format("woff2");font-weight:800;font-style:normal;font-display:swap}
+@font-face{font-family:"FT Regola Neue";src:url("../fonts/FTRegolaNeue-HeavyItalic.woff2") format("woff2");font-weight:800;font-style:italic;font-display:swap}
+/* Inter Tight — small body copy inside deck content cards; Inter — dense product tables */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@400;500;600&display=swap");

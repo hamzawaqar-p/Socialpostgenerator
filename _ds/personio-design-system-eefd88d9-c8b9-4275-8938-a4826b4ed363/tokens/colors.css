@@ -1,0 +1,57 @@
+:root{
+/* ── Core palette: Lavender (primary brand) ── */
+--lavender-10:#EDD6F5;--lavender-20:#DBADEB;--lavender-30:#C885E0;--lavender-40:#B85CD6;--lavender-50:#A533CC;--lavender-60:#8821AB;--lavender-70:#6A2183;--lavender-80:#531A66;--lavender-90:#320F3D;--lavender-95:#1A0821;
+/* ── Core palette: Flame (energy, CTA accents) ── */
+--flame-10:#FFD6CC;--flame-20:#FFAF99;--flame-30:#FF8766;--flame-40:#FF5F33;--flame-50:#FF3700;--flame-60:#CC2C00;--flame-70:#A32100;--flame-80:#801A00;--flame-90:#4D0F00;--flame-95:#290900;
+/* ── Core palette: Fog (pinkish neutral) ── */
+--fog-10:#F0E8EC;--fog-20:#DCD0D6;--fog-30:#C7B3BC;--fog-40:#BAA1AD;--fog-50:#9C7889;--fog-60:#644956;--fog-70:#46343D;--fog-80:#35272D;--fog-90:#1D1619;
+/* ── Core palette: Water (teal) ── */
+--water-10:#D5F4F6;--water-20:#BCEEF0;--water-30:#93E3E6;--water-40:#7ADDE1;--water-50:#40CFD3;--water-60:#20898D;--water-70:#176164;--water-80:#11494B;--water-90:#09282A;
+/* ── Core palette: Sky (blue) ── */
+--sky-20:#A1BCF7;--sky-30:#719AF4;--sky-40:#427AF0;--sky-50:#1359EC;--sky-60:#0743C5;--sky-70:#0C3A97;--sky-80:#0A2E76;--sky-90:#061B47;
+/* ── Core palette: Grey (neutral) ── */
+--grey-10:#E6E6E5;--grey-20:#CDCDCB;--grey-30:#B3B3B3;--grey-40:#999999;--grey-50:#808080;--grey-60:#666666;--grey-70:#525252;--grey-80:#404040;--grey-90:#262626;--grey-95:#141414;
+/* ── Extended palette: Berry ── */
+--berry-10:#FBD0E7;--berry-20:#F8B4D8;--berry-30:#EE8BC0;--berry-40:#EB70B2;--berry-50:#E64D9F;--berry-60:#A00E5B;--berry-70:#710A41;--berry-80:#540730;--berry-90:#2F041B;
+/* ── Extended palette: Terracotta ── */
+--terracotta-10:#F5DCD6;--terracotta-20:#EFC8BE;--terracotta-30:#E4A595;--terracotta-40:#DF907C;--terracotta-50:#CD593C;--terracotta-60:#8B3622;--terracotta-70:#612719;--terracotta-80:#491E13;--terracotta-90:#29100A;
+/* ── Extended palette: Marigold ── */
+--marigold-10:#FFEACC;--marigold-20:#FFD599;--marigold-30:#FFBF66;--marigold-40:#FFAA31;--marigold-50:#FF9500;--marigold-60:#CC7700;--marigold-70:#A36000;--marigold-80:#804B00;--marigold-90:#4D2D00;--marigold-95:#291800;
+/* ── Extended palette: Forest ── */
+--forest-10:#D6F5E4;--forest-20:#ADEBCA;--forest-30:#85E0B0;--forest-40:#5CD695;--forest-50:#33CC7B;--forest-60:#21AB63;--forest-70:#21834D;--forest-80:#1A663C;--forest-90:#0F3D24;--forest-95:#082113;
+
+/* ── Semantic: surfaces ── */
+--color-bg:#FFFFFF;
+--color-bg-subtle:#F5F5F4;
+--color-bg-muted:#E9E2E5;
+--color-bg-dark:#262626;
+--color-bg-darkest:#141414;
+--color-bg-teal:#D5F4F6;
+--color-bg-lavender:#EDD6F5;
+--color-bg-sunset:#320F3D;
+
+/* ── Semantic: foreground ── */
+--color-fg:#141414;
+--color-fg-secondary:#737370;
+--color-fg-tertiary:#9E9E9C;
+--color-fg-inverted:#FFFFFF;
+--color-fg-on-accent:#FFFFFF;
+
+/* ── Semantic: brand accent ── */
+--color-accent:#A533CC;
+--color-accent-hover:#8821AB;
+--color-accent-subtle:#EDD6F5;
+--color-accent-deep:#531A66;
+
+/* ── Semantic: functional ── */
+--color-success:#33CC7B;--color-success-subtle:#D6F5E4;--color-success-fg:#1A663C;
+--color-warning:#FF9500;--color-warning-subtle:#FFEACC;--color-warning-fg:#804B00;
+--color-error:#FF3700;--color-error-subtle:#FFD6CC;--color-error-fg:#801A00;
+--color-info:#1359EC;--color-info-subtle:#A1BCF7;--color-info-fg:#061B47;
+
+/* ── Semantic: borders ── */
+--color-border:#E2E2E1;
+--color-border-subtle:#F0F0EF;
+--color-border-strong:#C8C8C6;
+--color-focus-ring:rgba(165,51,204,0.12);
+}

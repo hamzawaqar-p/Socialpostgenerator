@@ -1,0 +1,15 @@
+:root{
+/* Four-stop diffuse shadow — the Personio product card elevation */
+--shadow-sm:0px 0.272px 2.129px rgba(0,0,0,0.014),0px 0.751px 5.885px rgba(0,0,0,0.02),0px 1.809px 14.169px rgba(0,0,0,0.026),0px 6px 47px rgba(0,0,0,0.04);
+--shadow-md:0px 1px 6px rgba(0,0,0,0.07),0px 4px 20px rgba(0,0,0,0.08);
+--shadow-lg:0px 4px 24px rgba(0,0,0,0.1),0px 16px 64px rgba(0,0,0,0.12);
+--shadow-focus:0 0 0 3px rgba(165,51,204,0.12);
+
+/* Floating glass panels (AI input, overlays) */
+--blur-panel:blur(100px); /* @kind other */
+
+--ease-standard:cubic-bezier(0.4,0,0.2,1); /* @kind other */
+--duration-fast:120ms; /* @kind other */
+--duration-base:150ms; /* @kind other */
+--duration-slow:200ms; /* @kind other */
+}
